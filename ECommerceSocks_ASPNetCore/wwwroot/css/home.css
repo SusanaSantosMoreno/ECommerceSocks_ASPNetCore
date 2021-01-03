@@ -1,0 +1,41 @@
+﻿body {
+    overflow-x: hidden;
+}
+
+.portrait-image {
+    background: url(../images/bannerImage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    position: relative;
+}
+
+.portrait-text {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.portrait-image div h1 {
+     font-family: 'Raleway', sans-serif !important;
+     color: white !important;
+     font-weight: 800 !important;
+     font-size: 60px !important;
+     letter-spacing: 4.5px !important;
+}
+
+.portrait-image div h3 {
+     font-family: 'Raleway', sans-serif !important;
+     color: white !important;
+     letter-spacing: 3px !important;
+     font-size: 30px !important;
+}
+
+.ml-6 {
+    margin-left: 5rem !important;
+}
+
+
+
