@@ -5,13 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
     <Folder Include="Models\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="wwwroot\" />
-    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\css\layout.css" />

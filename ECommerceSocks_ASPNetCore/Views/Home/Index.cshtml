@@ -2,14 +2,180 @@
     <!-- CSS -->
     <link href="~/css/home.css" rel="stylesheet">
 </head>
-<div class="portrait-image pt-5">
-    <div class="mt-5 ml-6 portrait-text">
-        <h1 class="fw-bolder row">FROM RURAL TO URBAN</h1>
-        <div class="row mt-3">
-            <button type="button" class="btn btn-light col me-3">MEN</button>
-            <button type="button" class="btn btn-light col me-3">WOMEN</button>
-            <button type="button" class="btn btn-light col">PACKS</button>
-
+<section id="home">
+    <div class="portrait-image pt-5">
+        <div class="mt-5 ml-6 portrait-text">
+            <h1 class="fw-bolder row ms-0 me-0">FROM RURAL TO URBAN</h1>
+            <button type="button" class="btn btn-outline-white m-0">VIEW COLLECTION</button>
         </div>
     </div>
-</div>
+    <div id="uvp" class="mt-4">
+        <div class="container-lg row mx-auto">
+            <div class="col-lg ms-5">
+                <div class="row">
+                    <i class='bx bx-timer bx-md col-1 me-3 mt-1'></i>
+                    <div class="col">
+                        <p class="fw-bold m-0">24-72 Hours Shipping</p>
+                        <p>Free on US orders over 40$</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg ms-5">
+                <div class="row">
+                    <div class="col-2 me-3">
+                        <h2 class="ml-n10">4.73</h2>
+                        <div class="row">
+                            <i class='bx bxs-star col bx-xxs px-0'></i>
+                            <i class='bx bxs-star col bx-xxs px-0'></i>
+                            <i class='bx bxs-star col bx-xxs px-0'></i>
+                            <i class='bx bxs-star col bx-xxs px-0'></i>
+                            <i class='bx bxs-star col bx-xxs px-0'></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bold m-0">Average Rating</p>
+                        <p>+3180 Reviews</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="row">
+                    <i class='bx bxs-t-shirt bx-md col-1 me-3 mt-1'></i>
+                    <div class="col">
+                        <p class="fw-bold m-0">Premium Quality</p>
+                        <p>Soft, durable socks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-lg mt-4 row mx-auto px-0">
+        <div id="menPortrait" class="col-lg me-3 portrait mb-3">
+            <div class="portrait-text ms-4">
+                <h3>Shop</h3>
+                <h1>MEN</h1>
+            </div>
+        </div>
+        <div id="womenPortrait" class="col-lg me-3 portrait mb-3">
+            <div class="portrait-text ms-4">
+                <h3>Shop</h3>
+                <h1>WOMEN</h1>
+            </div>
+        </div>
+        <div id="kidsPortrait" class="col-lg portrait mb-3">
+            <div class="portrait-text ms-4 text-white">
+                <h3>Shop</h3>
+                <h1>KIDS</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container-lg mt-3 mx-auto mb-5" id="packsPortrait">
+        <div class="mt-2 ml-6 portrait-text">
+            <h1 class="fw-bolder">PICK A PACK</h1>
+            <p class="fs-4">4, 6 or 10 pairs</p>
+            <h3 class="text-blue fw-bolder">Save up to 20%</h3>
+            <button type="button" class="btn btn-dark m-0 mt-2 w-100">PACKS</button>
+        </div>
+    </div>
+    <!--ITEMS CARROUSEL-->
+    <div id="lastItems">
+        <h2 class="text-center mb-3" id="lastItemsTitle"><span>Lastest Products</span></h2>
+        <div id="lastItemsCarrousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#carouselExampleDark" data-bs-slide-to="1"></li>
+                <li data-bs-target="#carouselExampleDark" data-bs-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <div class="row mx-10">
+                        <div class="card border border-white col-lg me-3">
+                            <div class="card-body">
+                                <div class="img-hover-zoom">
+                                    <a href="#">
+                                        <img src="https://api.jimmylion.com/img/300/300/resize/d/o/dogs-dark-blue_37.jpg"
+                                             class="img-fluid mx-auto d-block w-75"
+                                             alt="img">
+                                    </a>
+                                </div>
+                                <div id="product_content" class="text-center mt-3">
+                                    <div class="row">
+                                        <h5 class="m-0 col-lg-7 p-0 text-end">DOGS</h5>
+                                        <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                                    </div>
+                                    <p class="text-muted m-0">Mid-Calf · Dark Blue</p>
+                                    <p class="m-0">$8</p>
+                                    <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border border-white col-lg me-3">
+                            <div class="card-body">
+
+                                <div class="img-hover-zoom">
+                                    <a href="#">
+                                        <img src="https://api.jimmylion.com/img/300/300/resize/p/e/penguins_-_dark_grey_18.jpg"
+                                             class="img-fluid mx-auto d-block w-75"
+                                             alt="img">
+                                    </a>
+                                </div>
+                                <div id="product_content" class="text-center mt-3">
+                                        <div class="row">
+                                            <h5 class="m-0 col-lg-7 p-0 text-end">PENGUINS</h5>
+                                            <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                                        </div>
+                                        <p class="text-muted m-0">Mid-Calf · Blue</p>
+                                        <p class="m-0">$8</p>
+                                        <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border border-white col-lg me-3">
+                            <div class="card-body">
+                                <div class="img-hover-zoom">
+                                    <a href="#">
+                                        <img src="https://api.jimmylion.com/img/300/300/resize/s/k/skulls-dark-blue-view_2_43.jpg"
+                                             class="img-fluid mx-auto d-block w-75"
+                                             alt="img">
+                                    </a>
+                                </div>
+                                <div id="product_content" class="text-center mt-3">
+                                    <div class="row">
+                                        <h5 class="m-0 col-lg-7 p-0 text-end">SKULLS</h5>
+                                        <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                                    </div>
+                                    <p class="text-muted m-0">Mid-Calf · Dark Blue</p>
+                                    <p class="m-0">$8</p>
+                                    <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="..." class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#lastItemsCarrousel" role="button" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#lastItemsCarrousel" role="button" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </a>
+        </div>
+    </div>
+    <!--END ITEMS CARROUSEL-->
+</section>

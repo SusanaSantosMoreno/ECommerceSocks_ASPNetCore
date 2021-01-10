@@ -1,0 +1,94 @@
+﻿
+#category_header {
+    background: url(../images/men-banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    position: relative;
+}
+
+.category_header_text {
+    font-family: 'Raleway', sans-serif !important;
+    margin: 0;
+    position: absolute;
+    margin-left: 3rem;
+    color: white;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.category_header_text h1 {
+    font-weight: 700 !important;
+    letter-spacing: 4.5px !important;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.bg-light-grey {
+    background-color:#f7f6f6;
+}
+
+#subcategories h6 {
+    font-family: 'Raleway', sans-serif !important;
+    letter-spacing: 3.5px !important;
+    font-weight: 700;
+    margin-top:2.5rem !important;
+}
+
+.subcategory{
+    cursor:pointer;
+}
+
+.subcategory a{
+  visibility: hidden;  
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s linear;
+
+}
+
+.subcategory:hover {
+    background-color: rgba(55, 55, 55, 0.4);
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+.subcategory:hover h6 {
+    transform: translate(0,-15px);
+    -webkit-transform: translate(0,-15px);
+    -o-transform: translate(0,-15px);
+    -moz-transform: translate(0,-15px);
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+
+.subcategory:hover a {
+    /*transform: translate(0,-15px);
+    -webkit-transform: translate(0,-15px);
+    -o-transform: translate(0,-15px);
+    -moz-transform: translate(0,-15px);*/
+    opacity: 1;
+    visibility: visible;
+}
+
+li {
+    list-style: none;
+}
+
+#filter_section {
+    color: #373737 !important;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif !important;
+    letter-spacing: 3.5px !important;
+}
+
+#filter_section a{
+    color: #373737 !important;
+}
