@@ -50,40 +50,174 @@
             </div>
         </div>
     </div>
-    <div id="products_section" class="row">
-        <div id="filter_section" class="col-4 ">
+    <div id="products_section" class="row mb-5">
+        <div id="filter_section" class="col-3">
             <ul>
                 <li>
-                    <a data-bs-toggle="collapse" role="button"
-                       href="#collapse_style" aria-expanded="false" aria-controls="collapse_style">
-                        <span>STYLE</span><i class='bx bx-plus'></i>
-                    </a>
+                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse_style" aria-expanded="false"
+                            aria-controls="collapse_style">
+                        <span class="text-bold me-2">STYLE</span><i class='bx bx-plus'></i>
+                    </button>
                 </li>
-                <div class="collapse" id="collapse_style">
-                    Style
+                <div class="collapse ms-2 collapse-items" id="collapse_style">
+                    <ul>
+                        <li class="mb-1"><a href="#">Casual</a></li>
+                        <li class="mb-1"><a href="#">Athletic</a></li>
+                        <li class="mb-1"><a href="#">Basic</a></li>
+                    </ul>
                 </div>
                 <li>
-                    <a data-bs-toggle="collapse" role="button"
-                       href="#collapse_pattern" aria-expanded="false" aria-controls="collapse_pattern">
-                        <span>PATTERN</span><i class='bx bx-plus'></i>
-                    </a>
+                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse_pattern" aria-expanded="false"
+                            aria-controls="collapse_pattern">
+                        <span class="text-bold me-2">PRINT</span><i class='bx bx-plus'></i>
+                    </button>
                 </li>
-                <div class="collapse" id="collapse_pattern">
-                    Pattern
+                <div class="collapse ms-2 collapse-items" id="collapse_pattern">
+                    <ul>
+                        <li class="mb-1"><a href="#">Animals</a></li>
+                        <li class="mb-1"><a href="#">Adventures</a></li>
+                        <li class="mb-1"><a href="#">Food</a></li>
+                        <li class="mb-1"><a href="#">Plain</a></li>
+                        <li class="mb-1"><a href="#">Travel</a></li>
+                        <li class="mb-1"><a href="#">Cities</a></li>
+                        <li class="mb-1"><a href="#">Nature</a></li>
+                        <li class="mb-1"><a href="#">Holiday</a></li>
+                    </ul>
                 </div>
                 <li>
-                    <a data-bs-toggle="collapse" role="button"
-                       href="#collapse_color" aria-expanded="false" aria-controls="collapse_color">
-                        <span>COLOR</span><i class='bx bx-plus'></i>
-                    </a>
+                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse_color" aria-expanded="false"
+                            aria-controls="collapse_color">
+                        <span class="text-bold me-2">COLOR</span><i class='bx bx-plus'></i>
+                    </button>
                 </li>
-                <div class="collapse" id="collapse_color">
-                    Color
+                <div class="collapse ms-2 collapse-items" id="collapse_color">
+                    <div class="row g-4 align-items-center w-50">
+                        <div class="col">
+                            <a href="#">
+                                <svg height="40" width="40">
+                                    <circle cx="20" cy="20" r="15" stroke-width="0" fill="red" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="#">
+                                <svg height="40" width="40">
+                                    <circle cx="20" cy="20" r="15" stroke-width="0" fill="yellow" />
+
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="#">
+                                <svg height="40" width="40">
+                                    <circle cx="20" cy="20" r="15" stroke-width="0" fill="Blue" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="#">
+                                <svg height="40" width="40">
+                                    <circle cx="20" cy="20" r="15" stroke-width="0" fill="Green" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="#">
+                                <svg height="40" width="40">
+                                    <circle cx="20" cy="20" r="15" stroke-width="0" fill="Orange" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </ul>
         </div>
-        <div id="product_list_section" class="col-8">
-
+        <div id="product_list_section" class="col-9">
+            <div class="row g-4">
+                <div class="card border border-white col-lg me-3">
+                    <div class="card-body">
+                        <div class="img-hover-zoom">
+                            <a href="#">
+                                <img src="https://api.jimmylion.com/img/300/300/resize/d/o/dogs-dark-blue_37.jpg"
+                                     class="img-fluid mx-auto d-block w-75"
+                                     alt="img">
+                            </a>
+                        </div>
+                        <div id="product_content" class="text-center mt-3">
+                            <div class="row">
+                                <h5 class="m-0 col-lg-7 p-0 text-end">DOGS</h5>
+                                <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                            </div>
+                            <p class="text-muted m-0">Mid-Calf · Dark Blue</p>
+                            <p class="m-0">$8</p>
+                            <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border border-white col-lg me-3">
+                    <div class="card-body">
+                        <div class="img-hover-zoom">
+                            <a href="#">
+                                <img src="https://api.jimmylion.com/img/300/300/resize/d/o/dogs-dark-blue_37.jpg"
+                                     class="img-fluid mx-auto d-block w-75"
+                                     alt="img">
+                            </a>
+                        </div>
+                        <div id="product_content" class="text-center mt-3">
+                            <div class="row">
+                                <h5 class="m-0 col-lg-7 p-0 text-end">DOGS</h5>
+                                <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                            </div>
+                            <p class="text-muted m-0">Mid-Calf · Dark Blue</p>
+                            <p class="m-0">$8</p>
+                            <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border border-white col-lg me-3">
+                    <div class="card-body">
+                        <div class="img-hover-zoom">
+                            <a href="#">
+                                <img src="https://api.jimmylion.com/img/300/300/resize/d/o/dogs-dark-blue_37.jpg"
+                                     class="img-fluid mx-auto d-block w-75"
+                                     alt="img">
+                            </a>
+                        </div>
+                        <div id="product_content" class="text-center mt-3">
+                            <div class="row">
+                                <h5 class="m-0 col-lg-7 p-0 text-end">DOGS</h5>
+                                <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                            </div>
+                            <p class="text-muted m-0">Mid-Calf · Dark Blue</p>
+                            <p class="m-0">$8</p>
+                            <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border border-white col-lg me-3">
+                    <div class="card-body">
+                        <div class="img-hover-zoom">
+                            <a href="#">
+                                <img src="https://api.jimmylion.com/img/300/300/resize/d/o/dogs-dark-blue_37.jpg"
+                                     class="img-fluid mx-auto d-block w-75"
+                                     alt="img">
+                            </a>
+                        </div>
+                        <div id="product_content" class="text-center mt-3">
+                            <div class="row">
+                                <h5 class="m-0 col-lg-7 p-0 text-end">DOGS</h5>
+                                <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                            </div>
+                            <p class="text-muted m-0">Mid-Calf · Dark Blue</p>
+                            <p class="m-0">$8</p>
+                            <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

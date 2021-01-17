@@ -92,3 +92,51 @@ li {
 #filter_section a{
     color: #373737 !important;
 }
+
+.btn-transparent{
+    background: transparent !important;
+    border: none !important;
+    font-weight: 700 !important;
+    outline: none;
+}
+
+.btn-transparent:focus{
+    outline: none;
+}
+
+.collapse-items ul li a{
+    color: #6a6a6a;
+    font-weight: 500;
+    font-size: .8rem;
+    letter-spacing: 1.5px !important;
+}
+
+.collapse-items ul li a:hover {
+    color: #373535;
+    font-weight: 700;
+}
+
+circle:hover, cicle:active{
+    stroke: black;
+    stroke-width: 1px;
+}
+
+.img-hover-zoom {
+    overflow: hidden;
+}
+
+    .img-hover-zoom a img {
+        transition: transform .5s ease;
+    }
+
+    .img-hover-zoom:hover a img {
+        transform: scale(1.1);
+    }
+
+.heart-icon {
+    cursor: pointer;
+}
+
+    .heart-icon hover {
+        color: grey;
+    }
