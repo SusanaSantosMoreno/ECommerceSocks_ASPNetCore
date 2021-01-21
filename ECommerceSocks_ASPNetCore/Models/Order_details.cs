@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ECommerceSocks_ASPNetCore.Models {
+    [Table("Favorite_user")]
     public class Order_details {
 
+        [Key]
+        [Column("Order_id")]
         public int Order_id { get; set; }
+        [Column("Product_id")]
         public int Product_id { get; set; }
+        [Column("Pack_id")]
         public int Pack_id { get; set; }
+        [Column("Amount")]
         public int Amount { get; set; }
 
         public Order_details() { }

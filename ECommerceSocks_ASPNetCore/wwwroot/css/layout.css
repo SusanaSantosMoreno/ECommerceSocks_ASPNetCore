@@ -45,3 +45,11 @@ li{
 .w-30{
     width: 30%;
 }
+
+.nav-icons i{
+    cursor: pointer
+}
+
+.nav-icons i:hover {
+    color: #30302f !important;
+}

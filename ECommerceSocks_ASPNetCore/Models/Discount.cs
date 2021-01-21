@@ -1,15 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ECommerceSocks_ASPNetCore.Models {
+
+    [Table("Discount")]
     public class Discount {
 
+        [Key]
+        [Column("Discount_id")]
         public int Discount_id { get; set; }
+        [Column("Discount_name")]
         public String Discount_name { get; set; }
+        [Column("Discount_value")]
         public float Discount_value { get; set; }
+        [Column("Discount_code")]
         public String Discount_code { get; set; }
+        [Column("Discount_date")]
         public DateTime Discount_date { get; set; }
 
         public Discount() { }

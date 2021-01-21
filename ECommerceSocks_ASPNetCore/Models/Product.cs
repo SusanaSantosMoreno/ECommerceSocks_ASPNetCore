@@ -1,22 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ECommerceSocks_ASPNetCore.Models {
+    [Table("Product")]
     public class Product {
 
+        [Key]
+        [Column("Product_id")]
         public int Product_id { get; set; }
+        [Column("Product_name")]
         public String Product_name { get; set; }
+        [Column("Product_description")]
         public String Product_description { get; set; }
-        public float Product_price { get; set; }
+        [Column("Product_price")]
+        public double Product_price { get; set; }
+        [Column("Product_style")]
         public String Product_style { get; set; }
+        [Column("Product_print")]
         public String Product_print { get; set; }
+        [Column("Product_color")]
         public String Product_color { get; set; }
-        public int Product_category { get; set; }
-        public int Product_subcategory { get; set; }
-        public int Product_discount { get; set; }
-        public int Product_collection { get; set; }
+
+        [Column("Product_category")]
+        public int? Product_category { get; set; }
+        [Column("Product_subcategory")]
+        public int? Product_subcategory { get; set; }
+        [Column("Product_discount")]
+        public int? Product_discount { get; set; }
+        [Column("Product_collection")]
+        public int? Product_collection { get; set; }
+
+        [ForeignKey("Product_category")]
+        public virtual Category Category { get; set; }
+        [ForeignKey("Product_subcategory")]
+        public virtual Subcategory Subcategory { get; set; }
+        [ForeignKey("Product_discount")]
+        public virtual Discount Discount { get; set; }
+        [ForeignKey("Product_collection")]
+        public virtual Collections Collection { get; set; }
 
         public Product() {}
 

@@ -71,6 +71,10 @@
     background: url(../images/kidsPortrait.jpg) no-repeat;
     background-size: cover;
 }
+
+#kidsPortrait h3, #kidsPortrait h1{
+    color:white;
+}
     
 #menPortrait:hover, #womenPortrait:hover, #kidsPortrait:hover {
     filter: brightness(0.6);

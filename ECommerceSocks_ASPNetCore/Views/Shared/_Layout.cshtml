@@ -52,10 +52,11 @@
                             <span class="letter-spacing">OUTLET</span>
                         </a>
                     </li>
-                    <li class="w-50 mx-auto row">
+                    <li class="w-50 mx-auto row nav-icons">
                         <i class='bx bx-search bx-sm text-end col nav-icon m-auto'></i>
                         <i class='bx bx-heart bx-sm text-center col nav-icon m-auto'></i>
-                        <i class='bx bx-user bx-sm text-center col nav-icon m-auto'></i>
+                        <i class='bx bx-user bx-sm text-center col nav-icon m-auto'
+                           data-bs-toggle="modal" data-bs-target="#userModal"></i>
                         <i class='bx bx-shopping-bag bx-sm col pe-0 nav-icon m-auto'></i>
                     </li>
 
@@ -73,8 +74,8 @@
             <h6 class="text-center">Stay in the know when you sign up for our newsletter!</h6>
             <div class="row m-auto mt-3 w-50">
                 <input type="email" class="form-control col-auto w-50"
-                           id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Email Address">
+                       id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="Email Address">
                 <button type="button" class="btn btn-outline-dark col-auto w-50">Subscribe</button>
                 <div id="emailHelp" class="form-text text-center">
                     By entering your email address you will
@@ -121,6 +122,56 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border:none;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pb-5">
+                    <div id="login">
+                        <h4 class="text-center">Welcome</h4>
+                        <h2 class="text-center">DO YOU HAVE AN ACCOUNT?</h2>
+                        <form method="post" class="w-75 mx-auto mt-3" id="loginForm">
+                            <div class="mb-3">
+                                <label for="inputEmail" class="form-label">EMAIL ADDRESS *</label>
+                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                                       placeholder="Email Address *">
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputPassword" class="form-label">PASSWORD *</label>
+                                <input type="password" class="form-control" id="inputPassword"
+                                       placeholder="Password *">
+                            </div>
+                            <a class="text-dark" href="#" id="forgotPasswordLink">Forgot your password?</a>
+                            <button type="submit" class="btn btn-outline-dark w-100 mb-3 mt-3">LOGIN</button>
+                            <div class="w-100 text-center">
+                                <a class="text-dark" href="#">New customer? Sign up </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="forgotPassword">
+                        <h5 class="text-center">Enter your email to change your password.</h5>
+                        <form method="post" class="w-75 mx-auto mt-3" id="forgotForm">
+                            <div class="mb-3">
+                                <label for="inputEmailForgot" class="form-label">EMAIL ADDRESS *</label>
+                                <input type="email" class="form-control" id="inputEmailForgot" aria-describedby="emailHelp"
+                                       placeholder="Email Address *">
+                                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                            </div>
+                            <button type="submit" class="btn btn-outline-dark w-100 mb-3 mt-3">RESET PASSWORD</button>
+                            <div class="w-100 text-center">
+                                <a class="text-dark" href="#" id="ReturnLoginLink">Return to Login</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.js"
             integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
@@ -129,5 +180,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
             integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
             crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#forgotPassword").hide();
+        })
+
+        $("#forgotPasswordLink").click(function () {
+            $("#login").hide();
+            $("#forgotPassword").show();
+        });
+
+        $("#ReturnLoginLink").click(function () {
+            $("#login").show();
+            $("#forgotPassword").hide();
+        });
+    </script>
 </body>
 </html>
