@@ -24,7 +24,6 @@ namespace ECommerceSocks_ASPNetCore.Models {
         public String Product_print { get; set; }
         [Column("Product_color")]
         public String Product_color { get; set; }
-
         [Column("Product_category")]
         public int? Product_category { get; set; }
         [Column("Product_subcategory")]
@@ -43,7 +42,8 @@ namespace ECommerceSocks_ASPNetCore.Models {
         [ForeignKey("Product_collection")]
         public virtual Collections Collection { get; set; }
 
-        public Product() {}
+
+        public Product () {}
 
         public Product( int product_id, string product_name, string product_description, 
             float product_price, string product_style, string product_print, 
@@ -60,6 +60,27 @@ namespace ECommerceSocks_ASPNetCore.Models {
             Product_subcategory = product_subcategory;
             Product_discount = product_discount;
             Product_collection = product_collection;
+        }
+
+        public Product (int product_id, string product_name, string product_description, double product_price, 
+            string product_style, string product_print, string product_color, int? product_category, 
+            int? product_subcategory, int? product_discount, int? product_collection, 
+            Category category, Subcategory subcategory, Discount discount, Collections collection) {
+            Product_id = product_id;
+            Product_name = product_name;
+            Product_description = product_description;
+            Product_price = product_price;
+            Product_style = product_style;
+            Product_print = product_print;
+            Product_color = product_color;
+            Product_category = product_category;
+            Product_subcategory = product_subcategory;
+            Product_discount = product_discount;
+            Product_collection = product_collection;
+            Category = category;
+            Subcategory = subcategory;
+            Discount = discount;
+            Collection = collection;
         }
     }
 }

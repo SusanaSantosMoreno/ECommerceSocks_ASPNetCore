@@ -42,6 +42,25 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
                               select datos;
             return consulta.Count() == 0 ? null : consulta.First();
         }
+
+        public List<String> GetProductsStyles () {
+            var consulta = this.GetProducts().Select(x => x.Product_style).Distinct();
+            return consulta.ToList();
+        }
+
+        public List<String> GetProductsPrint () {
+            var consulta = this.GetProducts().Select(x => x.Product_print).Distinct();
+            return consulta.ToList();
+        }
+
+        public List<String> GetProductColor () {
+            var consulta = this.GetProducts().Select(x => x.Product_color).Distinct();
+            return consulta.ToList();
+        }
+
+        public List<Product> GetProductsByCategory (int category_id){
+            return this.GetProducts().Where(x => x.Product_category == category_id).ToList();
+        }
         #endregion
 
         #region CATEGORIES
@@ -57,6 +76,23 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
                            select datos;
             return consulta.Count() == 0 ? null : consulta.First();
         }
+        #endregion
+
+        #region SUBCATEGORIES
+
+        public List<Subcategory> GetSubcategories () {
+            var consulta = from datos in this.context.subcategories
+                           select datos;
+            return consulta.ToList();
+        }
+
+        public Subcategory GetSubcategory(int subcategory_id) {
+            var consulta = from datos in this.context.subcategories
+                           where datos.Subcategory_id == subcategory_id
+                           select datos;
+            return consulta.Count() == 0 ? null : consulta.First();
+        }
+
         #endregion
         /*public void createUser(String user_name, String user_email, 
             String user_password, String user_nationality, String user_phone, 

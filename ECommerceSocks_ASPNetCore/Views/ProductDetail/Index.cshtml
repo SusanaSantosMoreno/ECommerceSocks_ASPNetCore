@@ -1,0 +1,100 @@
+﻿@model Product 
+<head>
+    <!-- CSS -->
+    <link href="~/lib/css/ProductDetails.css" rel="stylesheet" />
+</head>
+<div class="container mx-auto my-10 row">
+
+    <div id="ProductCarousel" class="carousel carousel-dark col mx-auto" data-bs-ride="carousel" data-interval="false">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#ProductCarousel" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#ProductCarousel" data-bs-slide-to="1"></li>
+            <li data-bs-target="#ProductCarousel" data-bs-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/Products/Product_@(Model.Product_id).jpg" class="d-block w-75 mx-auto">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/Products/Product_@(Model.Product_id)@(Model.Category.Category_name.ToUpper()).jpg" 
+                     class="d-block w-75 mx-auto">
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/Products/Product_@(Model.Product_id)Print.jpg" class="d-block w-75 mx-auto">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#ProductCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#ProductCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
+    </div>
+
+    <div class="col mt-5" id="Product_content">
+        <h3>@Model.Product_name</h3>
+        <h6 class="text-muted mt-2">@(Model.Subcategory.Subcategory_name) · @(Model.Product_color) </h6>
+        <h3 class="mt-2">$ @Model.Product_price</h3>
+        <div class="btn-group w-50 mb-3 mt-3" role="group">
+            <button id="buttonTallas" type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                SIZES
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="buttonTallas">
+                <li><a class="dropdown-item" href="#">Size 6 - 9</a></li>
+                <li><a class="dropdown-item" href="#">Size 8 - 12</a></li>
+            </ul>
+        </div>
+        <button type="button" class="btn btn-outline-dark w-50">ADD TO CART</button>
+        <h6 class="text-muted mt-3">Delivery in 24/72h</h6>
+
+        <!--SECTIONS-->
+        <div id="filter_section">
+            <ul class="p-0">
+                <li>
+                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse_description" aria-expanded="false"
+                            aria-controls="collapse_description">
+                        <span class="text-bold me-2">DESCRIPTION</span><i class='bx bx-plus'></i>
+                    </button>
+                </li>
+
+                <div class="collapse ms-4 collapse-items" id="collapse_description">
+                    <p>@Model.Product_description</p>
+                </div>
+
+                <li>
+                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse_care" aria-expanded="false"
+                            aria-controls="collapse_care">
+                        <span class="text-bold me-2">CARE</span><i class='bx bx-plus'></i>
+                    </button>
+                </li>
+
+                <div class="collapse ms-4 collapse-items" id="collapse_care">
+                    <p>
+                        We recommend hand-washing to preserve colors and maintain size and shape
+                        or with cold water and no bleach. They will last longer if you line dry them.
+                        Colors will stay truer if you wash your socks inside-out. Avoid bleaching or
+                        ironing your socks. Avoid tumble drying.
+                    </p>
+                </div>
+
+                <li>
+                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse_info" aria-expanded="false"
+                            aria-controls="collapse_info">
+                        <span class="text-bold me-2">INFO</span><i class='bx bx-plus'></i>
+                    </button>
+                </li>
+
+                <div class="collapse ms-4 collapse-items" id="collapse_info">
+                    <p>
+                        78% Combed Cotton, 20% Polyamide, 2% Elastane
+                    </p>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -5,15 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Shared\" />
+    <Compile Remove="wwwroot\icons\NewFolder\**" />
+    <Compile Remove="wwwroot\js\**" />
+    <Content Remove="wwwroot\icons\NewFolder\**" />
+    <Content Remove="wwwroot\js\**" />
+    <EmbeddedResource Remove="wwwroot\icons\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\js\**" />
+    <None Remove="wwwroot\icons\NewFolder\**" />
+    <None Remove="wwwroot\js\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\Home\" />
-    <Folder Include="wwwroot\js\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="wwwroot\css\layout.css" />
+    <Content Remove="wwwroot\lib\css\layout.css" />
+    <Content Remove="wwwroot\images\Products\women-banner.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="wwwroot\css\layout.css">
+    <EmbeddedResource Include="wwwroot\lib\css\layout.css">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </EmbeddedResource>

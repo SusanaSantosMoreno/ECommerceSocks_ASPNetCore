@@ -1,0 +1,48 @@
+﻿#Product_content {
+    font-family:'Raleway', sans-serif;
+}
+
+#filter_section {
+    color: #373737 !important;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif !important;
+    letter-spacing: 3.5px !important;
+}
+
+#filter_section p{
+    color: #373737 !important;
+    font-weight: 400;
+    font-family: 'Raleway', sans-serif !important;
+    letter-spacing: normal !important;
+}
+
+#filter_section a {
+    color: #373737 !important;
+}
+
+.btn-transparent {
+    background: transparent !important;
+    border: none !important;
+    font-weight: 700 !important;
+    outline: none;
+}
+
+.btn-transparent:focus {
+    outline: none;
+}
+
+.collapse-items ul li a {
+    color: #6a6a6a;
+    font-weight: 500;
+    font-size: .8rem;
+    letter-spacing: 1.5px !important;
+}
+
+.collapse-items ul li a:hover {
+    color: #373535;
+    font-weight: 700;
+}
+
+li {
+    list-style: none;
+}

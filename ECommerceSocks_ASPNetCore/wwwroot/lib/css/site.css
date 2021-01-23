@@ -1,0 +1,28 @@
+﻿.mx-10 {
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+
+.ml-n10 {
+    margin-left: -10px !important;
+}
+
+a {
+    text-decoration: none;
+    color: #373737;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.w-30 {
+    width: 30%;
+}
+
+
+.my-10 {
+    margin-top: 6rem !important;
+    margin-bottom: 6rem !important;
+}

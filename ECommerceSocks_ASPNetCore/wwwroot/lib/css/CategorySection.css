@@ -1,6 +1,23 @@
 ﻿
-#category_header {
-    background: url(../images/men-banner.jpg);
+
+#category_header_men {
+    background: url(../../images/men-banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    position: relative;
+}
+
+#category_header_women {
+    background: url(../../images/women-banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    position: relative;
+}
+
+#category_header_kids {
+    background: url(../../images/kids_banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 400px;
@@ -21,11 +38,6 @@
 .category_header_text h1 {
     font-weight: 700 !important;
     letter-spacing: 4.5px !important;
-}
-
-a {
-    text-decoration: none;
-    color: black;
 }
 
 .bg-light-grey {
@@ -70,10 +82,6 @@ a {
 }
 
 .subcategory:hover a {
-    /*transform: translate(0,-15px);
-    -webkit-transform: translate(0,-15px);
-    -o-transform: translate(0,-15px);
-    -moz-transform: translate(0,-15px);*/
     opacity: 1;
     visibility: visible;
 }
@@ -140,3 +148,10 @@ circle:hover, cicle:active{
     .heart-icon hover {
         color: grey;
     }
+
+#product_content h5 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}

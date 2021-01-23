@@ -3,7 +3,7 @@
 }
 
 .portrait-image {
-    background: url(../images/bannerImage.jpg);
+    background: url(../../images/bannerImage.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 500px;
@@ -57,18 +57,22 @@
     cursor: pointer;
 }
 
+.category_link:hover {
+    color: black;
+}
+
 #menPortrait {
-    background: url(../images/menPortrait.jpg) no-repeat;
+    background: url(../../images/menPortrait.jpg) no-repeat;
     background-size: cover;
 }
 
 #womenPortrait {
-    background: url(../images/womenPortrait.jpg) no-repeat;
+    background: url(../../images/womenPortrait.jpg) no-repeat;
     background-size: cover;
 }
 
 #kidsPortrait {
-    background: url(../images/kidsPortrait.jpg) no-repeat;
+    background: url(../../images/kidsPortrait.jpg) no-repeat;
     background-size: cover;
 }
 
@@ -82,7 +86,7 @@
 }
 
 #packsPortrait {
-    background: url(../images/packsPortrait.jpg) no-repeat;
+    background: url(../../images/packsPortrait.jpg) no-repeat;
     background-size: cover;
     height: 300px;
     position: relative;
@@ -96,18 +100,12 @@
     font-size: 10px !important;
 }
 
-.ml-n10{
-    margin-left: -10px !important;
-}
+
 
 #lastItemsCarrousel{
     height: 450px !important;
 }
 
-.mx-10{
-    margin-left: 10rem;
-    margin-right: 10rem;
-}
 
 #lastItemsTitle {
     width: 87%;
@@ -120,11 +118,6 @@
 #lastItemsTitle span {
     background: #fff;
     padding: 0 10px;
-}
-
-a {
-    text-decoration: none;
-    color: black;
 }
 
 .heart-icon {
