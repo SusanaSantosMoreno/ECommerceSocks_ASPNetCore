@@ -22,7 +22,7 @@ namespace ECommerceSocks_ASPNetCore {
         }
        
         public void ConfigureServices (IServiceCollection services) {
-            String cadena = configuration.GetConnectionString("EcommerceSocks_Database2");
+            String cadena = configuration.GetConnectionString("EcommerceSocks_Database");
             services.AddTransient<Ecommerce_socksRepository>();
             services.AddDbContext<Ecommerce_socksContext>(options => options.UseSqlServer(cadena));
             services.AddControllersWithViews();

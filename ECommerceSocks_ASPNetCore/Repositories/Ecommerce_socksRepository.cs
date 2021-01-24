@@ -108,7 +108,7 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
                 productSize.Size = this.GetSize(productSize.Size_id);
                 productSizes.Add(productSize);
             }
-            return productSizes;
+            return consulta.ToList();
         }
 
         public Size GetSize(int size_id) {

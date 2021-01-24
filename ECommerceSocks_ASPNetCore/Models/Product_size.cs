@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 namespace ECommerceSocks_ASPNetCore.Models {
     [Table("Product_size")]
     public class Product_size {
-
         [Key]
+        [Column("Product_size_id")]
+        public int Product_size_id { get; set; }
         [Column("Product_id")]
         public int Product_id { get; set; }
         [Column("Size_id")]

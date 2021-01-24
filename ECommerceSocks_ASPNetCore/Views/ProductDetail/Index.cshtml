@@ -38,11 +38,11 @@
             </a>
         </div>
 
-        <div class="col mt-5 pt-5" id="Product_content">
+        <div class="col mt-5" id="Product_content">
             <div class="row">
                 <h3 class="col-5">@Model.Product_name</h3>
                 <div class="col mt-1">
-                    <i class='bx bx-sm bx-heart heart-icon p-0 text-start me-2 icon-hover'></i>
+                    <i class='bx bx-sm bx-heart heart-icon p-0 text-start me-2 icon-hover fav_icon'></i>
                     <i class='bx bxs-share-alt bx-sm icon-hover'></i>
                 </div>
                 
@@ -50,7 +50,7 @@
             <h6 class="text-muted mt-2">@(Model.Subcategory.Subcategory_name) · @(Model.Product_color) </h6>
             <h3 class="mt-2">$ @Model.Product_price</h3>
             <div class="btn-group w-50 mb-3 mt-3" role="group">
-                <button id="buttonTallas" type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <button id="buttonTallas" type="button" class="btn btn-outline-dark dropdown-toggle fw-bold" data-bs-toggle="dropdown" aria-expanded="false">
                     SIZES
                 </button>
                 <ul class="dropdown-menu w-100" aria-labelledby="buttonTallas">
@@ -59,7 +59,7 @@
                     }
                 </ul>
             </div>
-            <button type="button" class="btn btn-outline-dark w-50">ADD TO CART</button>
+            <button type="button" class="btn btn-outline-dark w-50 fw-bold">ADD TO CART</button>
             <h6 class="text-muted mt-3">Delivery in 24/72h</h6>
 
             <!--SECTIONS-->
