@@ -94,6 +94,36 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         }
 
         #endregion
+
+        #region SIZES
+        public List<Product_size> GetProduct_Sizes(int product_id) {
+            var consulta = from datos in this.context.product_sizes
+                           where datos.Product_id == product_id
+                           select datos;
+            List<Product_size> product_sizes = consulta.ToList();
+            List<Product_size> productSizes = new List<Product_size>();
+            foreach (var dato in product_sizes) {
+                Product_size productSize = new Product_size(dato.Product_id, dato.Size_id);
+                productSize.Product = this.GetProduct(product_id);
+                productSize.Size = this.GetSize(productSize.Size_id);
+                productSizes.Add(productSize);
+            }
+            return productSizes;
+        }
+
+        public Size GetSize(int size_id) {
+            var consulta = from datos in this.context.size
+                           where datos.Size_id == size_id
+                           select datos;
+            return consulta.First();
+        }
+
+        public List<Size> GetSizes () {
+             return (from datos in this.context.size
+                           select datos).ToList();
+        }
+        #endregion
+
         /*public void createUser(String user_name, String user_email, 
             String user_password, String user_nationality, String user_phone, 
             DateTime user_birthDate, List<Addresses> addresses) {

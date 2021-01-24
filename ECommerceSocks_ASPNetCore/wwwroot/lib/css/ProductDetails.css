@@ -2,7 +2,7 @@
     font-family:'Raleway', sans-serif;
 }
 
-#filter_section {
+#filter_section, #filter_section button {
     color: #373737 !important;
     font-weight: 700;
     font-family: 'Raleway', sans-serif !important;
@@ -45,4 +45,12 @@
 
 li {
     list-style: none;
+}
+
+i{
+    cursor: pointer;
+}
+
+.icon-hover:hover {
+    color: #6c757d;
 }
