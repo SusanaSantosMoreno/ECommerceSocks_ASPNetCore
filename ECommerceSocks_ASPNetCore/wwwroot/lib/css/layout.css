@@ -49,3 +49,48 @@ li{
 .nav-icons i:hover {
     color: #30302f !important;
 }
+
+
+/*SIDE MODAL*/
+#modal_aside_right {
+    font-family: 'Raleway', sans-serif !important;
+}
+
+.modal .modal-dialog-aside {
+    width: 500px;
+    max-width: 80%;
+    height: 100%;
+    margin: 0;
+    transform: translate(0);
+    transition: transform .2s;
+}
+
+.modal .modal-dialog-aside .modal-content {
+    height: inherit;
+    border: 0;
+    border-radius: 0;
+}
+
+.modal .modal-dialog-aside .modal-content .modal-body {
+    overflow-y: auto
+}
+
+.modal.fixed-left .modal-dialog-aside {
+    margin-left: auto;
+    transform: translateX(100%);
+}
+
+.modal.show .modal-dialog-aside {
+    transform: translateX(0);
+}
+
+#cartPriceSection {
+    height: 100px;
+    -webkit-box-shadow: 0px -1rem 0.5rem 0px rgba(0,0,0,.15);
+    -moz-box-shadow: 0px -1rem 0.5rem 0px rgba(0,0,0,.15);
+    box-shadow: 0px -1rem 0.5rem 0px rgba(0,0,0,.15);
+}
+
+.modal-footer{
+    height: 100px !important;
+}
