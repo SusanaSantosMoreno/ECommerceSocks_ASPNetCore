@@ -1,7 +1,7 @@
 ﻿@model Product 
 @{ 
     List<Product> products = ViewData["Products"] as List<Product>;
-    List<Product_size> productSizes = ViewData["ProductSize"] as List<Product_size>;
+    List<Product_sizes> productSizes = ViewData["ProductSize"] as List<Product_sizes>;
 }
 <head>
     <!-- CSS -->
@@ -54,8 +54,8 @@
                     SIZES
                 </button>
                 <ul class="dropdown-menu w-100" aria-labelledby="buttonTallas">
-                    @foreach (Product_size ps in productSizes) {
-                        <li><a class="dropdown-item" href="#">Size @ps.Size.Size_UK</a></li>
+                    @foreach (Product_sizes ps in productSizes) {
+                        <li><a class="dropdown-item" href="#">Size @ps.Size_UK</a></li>
                     }
                 </ul>
             </div>

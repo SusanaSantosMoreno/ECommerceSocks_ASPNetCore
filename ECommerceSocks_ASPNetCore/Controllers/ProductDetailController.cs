@@ -28,7 +28,7 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
                 }
             }
             ViewData["Products"] = products;
-            List<Product_size> productSizes = this.repository.GetProduct_Sizes(product.Product_id);
+            List<Product_sizes> productSizes = this.repository.GetProduct_Sizes_Views(product.Product_id);
             ViewData["ProductSize"] = productSizes;
             return View(product);
         }

@@ -5,6 +5,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body pb-5">
+                <!--LOGIN-->
                 <div id="login">
                     <h4 class="text-center">Welcome</h4>
                     <h2 class="text-center">DO YOU HAVE AN ACCOUNT?</h2>
@@ -23,10 +24,11 @@
                         <a class="text-dark" href="#" id="forgotPasswordLink">Forgot your password?</a>
                         <button type="submit" class="btn btn-outline-dark w-100 mb-3 mt-3">LOGIN</button>
                         <div class="w-100 text-center">
-                            <a class="text-dark" href="#">New customer? Sign up </a>
+                            <a class="text-dark" href="#" id="signUpLink">New customer? Sign up </a>
                         </div>
                     </form>
                 </div>
+                <!--FORGOT PASSWORD-->
                 <div id="forgotPassword">
                     <h5 class="text-center">Enter your email to change your password.</h5>
                     <form method="post" class="w-75 mx-auto mt-3" id="forgotForm">
@@ -38,7 +40,44 @@
                         </div>
                         <button type="submit" class="btn btn-outline-dark w-100 mb-3 mt-3">RESET PASSWORD</button>
                         <div class="w-100 text-center">
-                            <a class="text-dark" href="#" id="ReturnLoginLink">Return to Login</a>
+                            <a class="text-dark ReturnLoginLink" href="#">Return to Login</a>
+                        </div>
+                    </form>
+                </div>
+                <!--SIGN UP-->
+                <div id="signUp">
+                    <h4 class="text-center">New customer? Sign up</h4>
+                    <form method="post" class="w-75 mx-auto mt-3" id="signUp">
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">EMAIL ADDRESS *</label>
+                            <input type="email" class="form-control" id="inputEmailSignUp" aria-describedby="emailHelp"
+                                   placeholder="Email Address *">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="nameSignUp" class="form-label">NAME AND SURNAME *</label>
+                            <input type="email" class="form-control" id="nameSignUp"
+                                   placeholder="Name and Surname *">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPasswordSignUp" class="form-label">PASSWORD *</label>
+                            <input type="password" class="form-control" id="inputPasswordSignUp"
+                                   placeholder="Enter new password *">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPasswordSignUpRepeat" class="form-label">PASSWORD *</label>
+                            <input type="password" class="form-control" id="inputPasswordSignUpRepeat"
+                                   placeholder="Repeat password *">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="termsCheck">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                I accept terms of service *
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-outline-dark w-100 mb-3 mt-3">SIGN UP</button>
+                        <div class="w-100 text-center">
+                            <a class="text-dark ReturnLoginLink" href="#">Return to Login</a>
                         </div>
                     </form>
                 </div>
