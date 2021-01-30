@@ -25,6 +25,16 @@ namespace ECommerceSocks_ASPNetCore {
             String cadena = configuration.GetConnectionString("EcommerceSocks_Azure");
             services.AddTransient<Ecommerce_socksRepository>();
             services.AddDbContext<Ecommerce_socksContext>(options => options.UseSqlServer(cadena));
+
+            /*SESSION*/
+            services.AddDistributedMemoryCache();
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromDays(1);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.Cookie.Name = ".ECommerceSocks.Session";
+            });
+
             services.AddControllersWithViews();
         }
 
@@ -33,9 +43,9 @@ namespace ECommerceSocks_ASPNetCore {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllerRoute(
                     name: "default",

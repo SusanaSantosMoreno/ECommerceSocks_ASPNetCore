@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace ECommerceSocks_ASPNetCore.Models {
     [Table("Product")]
     public class Product {
-
         [Key]
         [Column("Product_id")]
         public int Product_id { get; set; }
@@ -43,12 +42,12 @@ namespace ECommerceSocks_ASPNetCore.Models {
         public virtual Collections Collection { get; set; }
 
 
-        public Product () {}
+        public Product () { }
 
-        public Product( int product_id, string product_name, string product_description, 
-            float product_price, string product_style, string product_print, 
-            string product_color, int product_category, int product_subcategory, 
-            int product_discount, int product_collection ) {
+        public Product (int product_id, string product_name, string product_description,
+            float product_price, string product_style, string product_print,
+            string product_color, int product_category, int product_subcategory,
+            int product_discount, int product_collection) {
             Product_id = product_id;
             Product_name = product_name;
             Product_description = product_description;
@@ -62,9 +61,9 @@ namespace ECommerceSocks_ASPNetCore.Models {
             Product_collection = product_collection;
         }
 
-        public Product (int product_id, string product_name, string product_description, double product_price, 
-            string product_style, string product_print, string product_color, int? product_category, 
-            int? product_subcategory, int? product_discount, int? product_collection, 
+        public Product (int product_id, string product_name, string product_description, double product_price,
+            string product_style, string product_print, string product_color, int? product_category,
+            int? product_subcategory, int? product_discount, int? product_collection,
             Category category, Subcategory subcategory, Discount discount, Collections collection) {
             Product_id = product_id;
             Product_name = product_name;
@@ -83,4 +82,6 @@ namespace ECommerceSocks_ASPNetCore.Models {
             Collection = collection;
         }
     }
+
 }
+

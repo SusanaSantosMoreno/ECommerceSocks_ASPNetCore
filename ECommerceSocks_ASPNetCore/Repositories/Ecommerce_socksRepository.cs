@@ -61,6 +61,20 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         public List<Product> GetProductsByCategory (int category_id){
             return this.GetProducts().Where(x => x.Product_category == category_id).ToList();
         }
+
+        public List<Product_Complete> GetProduct_CompletesByCategory(int category_id) {
+            var consulta = from datos in this.context.products_Complete
+                           where datos.Product_category == category_id
+                           select datos;
+            return consulta.ToList();
+        }
+
+        public Product_Complete GetProduct_Complete(int product_id) {
+            var consulta = from datos in this.context.products_Complete
+                           where datos.Product_id == product_id
+                           select datos;
+            return consulta.Count() == 0 ? null : consulta.First();
+        }
         #endregion
 
         #region CATEGORIES
@@ -112,6 +126,12 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
             return (from datos in this.context.product_sizes_view
                     where datos.Product_id == product_id
                     select datos).ToList();
+        }
+
+        public Product_sizes GetProduct_Size_View (int product_id, int size_id) {
+            return (from datos in this.context.product_sizes_view
+                    where datos.Product_id == product_id && datos.Size_id==size_id
+                    select datos).FirstOrDefault();
         }
         #endregion
 

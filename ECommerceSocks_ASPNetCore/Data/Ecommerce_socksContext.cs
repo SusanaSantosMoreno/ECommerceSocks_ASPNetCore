@@ -24,5 +24,6 @@ namespace ECommerceSocks_ASPNetCore.Data {
         public DbSet<Subcategory> subcategories { get; set; }
         public DbSet<Users> users { get; set; }
         public DbSet<Product_sizes> product_sizes_view { get; set; }
+        public DbSet<Product_Complete> products_Complete { get; set; }
     }
 }

@@ -15,22 +15,20 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             this.repository = repo;
         }
         public IActionResult Index (int product_id) {
-            Product product = this.repository.GetProduct(product_id);
-            product.Category = this.repository.GetCategory((int)product.Product_category);
-            product.Subcategory = this.repository.GetSubcategory((int)product.Product_subcategory);
-            List<Product> products = new List<Product>();
-            List<Product> ps = this.repository.GetProductsByCategory((int)product.Product_category);
-            foreach(Product p in ps) {
-                if (p != product) {
-                    p.Category = this.repository.GetCategory((int)p.Product_category);
-                    p.Subcategory = this.repository.GetSubcategory((int)p.Product_subcategory);
-                    products.Add(p);
-                }
-            }
+            Product_Complete product = this.repository.GetProduct_Complete(product_id);
+            List<Product_Complete> products = this.repository.
+                GetProduct_CompletesByCategory((int)product.Product_category);
             ViewData["Products"] = products;
             List<Product_sizes> productSizes = this.repository.GetProduct_Sizes_Views(product.Product_id);
             ViewData["ProductSize"] = productSizes;
             return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Index(int product_id, int size_id) {
+            Product_Complete product = this.repository.GetProduct_Complete(product_id);
+            Product_sizes product_size = this.repository.GetProduct_Size_View(product_id, size_id);
+            return View();
         }
     }
 }
