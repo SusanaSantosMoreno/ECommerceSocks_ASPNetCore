@@ -100,7 +100,12 @@
     font-size: 10px !important;
 }
 
-
+#product_content h5 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
 
 #lastItemsCarrousel{
     height: 450px !important;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerceSocks_ASPNetCore.Data;
+using ECommerceSocks_ASPNetCore.Helpers;
 using ECommerceSocks_ASPNetCore.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,9 @@ namespace ECommerceSocks_ASPNetCore {
                 options.Cookie.IsEssential = true;
                 options.Cookie.Name = ".ECommerceSocks.Session";
             });
+
+            /*HELPERS*/
+            services.AddSingleton<MailService>();
 
             services.AddControllersWithViews();
         }

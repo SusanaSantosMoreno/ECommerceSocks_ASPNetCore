@@ -14,7 +14,7 @@ a {
 
 a:hover {
     text-decoration: none;
-    color: black;
+    color: black !important;
 }
 
 .w-30 {
@@ -25,4 +25,64 @@ a:hover {
 .my-10 {
     margin-top: 6rem !important;
     margin-bottom: 6rem !important;
+}
+
+.w-80{
+    width: 80%;
+}
+
+.f-raleway {
+    font-family: 'Raleway', sans-serif !important;
+}
+
+.btn-outline-dark:hover{
+    color: white !important;
+}
+
+.fw-semibold {
+    font-weight: 600!important;
+}
+
+.fw-500{
+    font-weight: 500 !important;
+}
+
+.pointer{
+    cursor:pointer;
+}
+
+.fs-09{
+    font-size: .9rem;
+}
+
+.bx-share-alt:hover, .bx-heart:hover {
+    color: grey;
+}
+
+.btn-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.btn-white-primary {
+    background-color: #fff;
+    color: #111;
+}
+
+    .btn-white-primary:hover {
+        background-color: #ff6f61;
+        border-color: #ff6f61;
+        color: #fff;
+    }
+
+.card-action {
+    position: absolute;
+    top: 1.25rem;
+    z-index: 1;
+    right: 1.25rem;
 }

@@ -69,12 +69,33 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
             return consulta.ToList();
         }
 
+        public List<Product_Complete> GetProduct_Completes () {
+            var consulta = from datos in this.context.products_Complete
+                           select datos;
+            return consulta.ToList();
+        }
+
         public Product_Complete GetProduct_Complete(int product_id) {
             var consulta = from datos in this.context.products_Complete
                            where datos.Product_id == product_id
                            select datos;
             return consulta.Count() == 0 ? null : consulta.First();
         }
+
+        public List<Product_Complete> GetFirstProduct_Complete (int amount) {
+            List<Product_Complete> lastProducts = this.GetProduct_Completes().Take(amount).ToList();
+            return lastProducts;
+        }
+
+        public List<Product_Complete> FilterProduct_Completes (int category_id, int subcategory_id,
+            List<String> stylesFilter, List<String> printsFilter, List<String> colorsFilter) {
+            var consulta = from datos in this.context.products_Complete
+                           where datos.Product_subcategory == subcategory_id && 
+                                 stylesFilter.Contains(datos.Product_style)
+                           select datos;
+            return consulta.ToList();
+        }
+
         #endregion
 
         #region CATEGORIES

@@ -1,0 +1,86 @@
+﻿<div class="container mt-5 pt-5 mb-5 f-raleway">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a></li>
+                <li class="breadcrumb-item" style="color:#6c757d">My Account</li>
+            </ol>
+        </nav>
+        <h2 class="mb-5 text-center">My Account</h2>
+    </div>
+    <div class="row" id="accountCategory">
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountOrdersLink" class="text-muted pointer">
+                        <div class="w-100 row">
+                            <span class="col-10">Orders</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountWishlistLink" class="text-muted pointer">
+                        <div class="w-100 row">
+                            <span class="col-10">WishList</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
+                        <div class="w-100 row">
+                            <span class="col-10">Personal Info</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
+                        <div class="w-100 row">
+                            <span class="col-10">Addresses</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
+                        <div class="w-100 row">
+                            <span class="col-10">Payment Method</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
+                        <div class="w-100 row">
+                            <span class="col-10">Logout</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8" id="accountCategoryViews"></div>
+    </div>
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#accountCategoryViews").load("/Account/GetOrdersPartial");
+
+        $("#AccountOrdersLink").click(function () {
+            $("#accountCategoryViews").load("/Account/GetOrderDetailsPartial");
+        });
+
+        $("#AccountWishlistLink").click(function () {
+            $("#accountCategoryViews").load("/Account/GetWishlistPartial");
+        });
+
+        /*$("#orderDetailsBtn").click(function () {
+            $("#orderDetails").load("/Account/GetOrderDetailsPartial");
+        });*/
+    });
+</script>
+}

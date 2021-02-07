@@ -1,6 +1,9 @@
-﻿using ECommerceSocks_ASPNetCore.Models;
+﻿using ECommerceSocks_ASPNetCore.Helpers;
+using ECommerceSocks_ASPNetCore.Models;
 using ECommerceSocks_ASPNetCore.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,10 +28,21 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Index(int product_id, int size_id) {
+        public IActionResult Index (int product_id, int size_id) {
+            //ADD PRODUCT TO SESSION CART
             Product_Complete product = this.repository.GetProduct_Complete(product_id);
             Product_sizes product_size = this.repository.GetProduct_Size_View(product_id, size_id);
-            return View();
+            Cart cart = new Cart(product, product_size, 1);
+            if (this.HttpContext.Session.GetString("SesionCart") != null) {
+                List<Cart> sessionCartItems = JsonConvert.DeserializeObject<List<Cart>>(this.HttpContext.Session.GetString("SesionCart"));
+                sessionCartItems.Add(cart);
+                this.HttpContext.Session.SetString("SesionCart", JsonConvert.SerializeObject(sessionCartItems));
+            } else {
+                List<Cart> cart_items = new List<Cart>();
+                cart_items.Add(cart);
+                this.HttpContext.Session.SetString("SesionCart", JsonConvert.SerializeObject(cart_items));
+            }
+            return RedirectToAction("Index", new { product_id = product.Product_id });
         }
     }
 }

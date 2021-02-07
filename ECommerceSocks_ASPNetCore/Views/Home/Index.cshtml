@@ -1,4 +1,4 @@
-﻿@model List<Product>
+﻿@model List<Product_Complete>
 @{
     List<Category> categories = ViewData ["Categories"] as List<Category>;
 }
@@ -57,7 +57,7 @@
     <div class="container-lg mt-4 row mx-auto px-0">
         @foreach (Category category in categories) {
         <a asp-action="Index" asp-controller="CategorySection" 
-           asp-route-category="@category.Category_id" class="col-lg category_link">
+           asp-route-category_id="@category.Category_id" class="col-lg category_link">
             <div id="@category.Category_name.ToLower()Portrait" class="me-3 portrait mb-3">
                 <div class="portrait-text ms-4">
                     <h3>Shop</h3>
@@ -88,29 +88,30 @@
                 @for (int i = 0; i < 3; i++) {
                     <div class="carousel-item @(i==0? "active" : "")" data-bs-interval="10000">
                         <div class="row mx-10">
-                            @for(int j=0; j<3; j++) {
-                                Product product = Model [(i*3) + j];
-                                <div class="card border border-white col-lg me-3">
+                            @for (int j = 0; j < 4; j++) {
+                                Product_Complete product = Model[(i * 4) + j];
+                                <div class="card border border-white col mb-3">
                                     <div class="card-body">
                                         <div class="img-hover-zoom">
-                                            <a href="#">
+                                            <a asp-controller="ProductDetail" asp-action="Index"
+                                               asp-route-product_id="@product.Product_id">
                                                 <img src="~/images/Products/Product_@(product.Product_id).jpg"
                                                      class="img-fluid mx-auto d-block w-75"
-                                                     alt="img" />
+                                                     alt="img">
                                             </a>
                                         </div>
-                                        <div id="product_content" class="text-center mt-3">
-                                            <div class="row">
-                                                <h5 class="m-0 col-lg-7 p-0 text-end">@product.Product_name</h5>
-                                                <i class='bx col bx-sm bx-heart heart-icon p-0 text-end me-2'></i>
+                                        <div id="product_content" class="mt-4 f-raleway">
+                                            <div class="row m-0">
+                                                <h5 class="col m-0 p-0 fw-semibold">@product.Product_name.ToUpper()</h5>
+                                                <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
+                                                <i class="bx bx-sm bx-heart col-2 m-0 p-0 text-end pointer"></i>
                                             </div>
-                                            <p class="text-muted m-0">Mid-Calf · @product.Product_color</p>
-                                            <p class="m-0">$@product.Product_price</p>
+                                            <p class="text-muted m-0 fs-09 fw-semibold">@product.Subcategory_name · @product.Product_color</p>
+                                            <p class="m-0 fw-semibold">$@product.Product_price</p>
                                             <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
                                         </div>
                                     </div>
                                 </div>
-                                
                             }
                         </div>
                     </div>

@@ -17,7 +17,7 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
 
         // GET HOME
         public IActionResult Index () {
-            List<Product> lastProduct = this.repository.GetFirstProduct(9);
+            List<Product_Complete> lastProduct = this.repository.GetFirstProduct_Complete(12);
             List<Category> categories = this.repository.GetCategories();
             ViewData ["Categories"] = categories;
             return View(lastProduct);
