@@ -1,6 +1,8 @@
-﻿using ECommerceSocks_ASPNetCore.Models;
+﻿using ECommerceSocks_ASPNetCore.Helpers;
+using ECommerceSocks_ASPNetCore.Models;
 using ECommerceSocks_ASPNetCore.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,12 @@ using System.Threading.Tasks;
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class CategorySectionController : Controller {
 
-        private Ecommerce_socksRepository repository;
+        private IRepositoryEcommerce_socks repository;
+        private IMemoryCache memoryCache;
 
-        public CategorySectionController (Ecommerce_socksRepository repo) {
+        public CategorySectionController (IRepositoryEcommerce_socks repo, IMemoryCache memoryCache) {
             this.repository = repo;
+            this.memoryCache = memoryCache;
         }
 
         public IActionResult Index(int category_id, int? subcategory_id) {
@@ -21,7 +25,14 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             ViewData["Category"] = category;
             List<Subcategory> subcategories = repository.GetSubcategories();
             ViewData["Subcategories"] = subcategories;
-            List<String> styles = this.repository.GetProductsStyles();
+
+            List<String> styles = new List<String>();
+            if (this.memoryCache.Get("Styles") == null) {
+                styles = this.repository.GetProductsStyles();
+                this.memoryCache.Set("Styles", ToolkitService.SerializeJsonObject(styles));
+            } else {
+                styles = ToolkitService.DeserializeJsonObject<List<String>>(this.memoryCache.Get("Styles").ToString());
+            }
             ViewData["Styles"] = styles;
             List<String> print = this.repository.GetProductsPrint();
             ViewData["Print"] = print;

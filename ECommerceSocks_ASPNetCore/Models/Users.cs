@@ -11,6 +11,7 @@ namespace ECommerceSocks_ASPNetCore.Models {
     public class Users {
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("Users_id")]
         public int Users_id { get; set; }
 
@@ -32,22 +33,32 @@ namespace ECommerceSocks_ASPNetCore.Models {
         [Column("Users_birthDate")]
         public DateTime User_birthDate { get; set; }
 
-        public ICollection<Addresses> Users_Addresses { get; set; }
+        [Column("Users_gender")]
+        public String Users_gender { get; set; }
 
+        [Column("Users_salt")]
+        public String Users_salt { get; set; }
 
         public Users() {}
 
-        public Users( int users_id, string users_name, string users_email, 
+        public Users (string users_name, string users_email, string user_password) {
+            Users_name = users_name;
+            Users_email = users_email;
+            User_password = user_password;
+        }
+
+        public Users (int users_id, string users_name, string users_email, 
             string user_password, string user_nationality, string user_phone, 
-            DateTime user_birthDate, ICollection<Addresses> addresses) {
-            this.Users_id = users_id;
-            this.Users_name = users_name;
-            this.Users_email = users_email;
-            this.User_password = user_password;
-            this.User_nationality = user_nationality;
-            this.User_phone = user_phone;
-            this.User_birthDate = user_birthDate;
-            this.Users_Addresses = addresses;
+            DateTime user_birthDate, string users_gender, string users_salt) {
+            Users_id = users_id;
+            Users_name = users_name;
+            Users_email = users_email;
+            User_password = user_password;
+            User_nationality = user_nationality;
+            User_phone = user_phone;
+            User_birthDate = user_birthDate;
+            Users_gender = users_gender;
+            Users_salt = users_salt;
         }
     }
 }

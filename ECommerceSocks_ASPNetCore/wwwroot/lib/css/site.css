@@ -12,10 +12,10 @@ a {
     color: #373737;
 }
 
-a:hover {
-    text-decoration: none;
-    color: black !important;
-}
+    a:hover {
+        text-decoration: none;
+        color: black !important;
+    }
 
 .w-30 {
     width: 30%;
@@ -27,7 +27,7 @@ a:hover {
     margin-bottom: 6rem !important;
 }
 
-.w-80{
+.w-80 {
     width: 80%;
 }
 
@@ -35,24 +35,36 @@ a:hover {
     font-family: 'Raleway', sans-serif !important;
 }
 
-.btn-outline-dark:hover{
+.btn-outline-dark:hover {
     color: white !important;
 }
 
 .fw-semibold {
-    font-weight: 600!important;
+    font-weight: 600 !important;
 }
 
-.fw-500{
+.fw-500 {
     font-weight: 500 !important;
 }
 
-.pointer{
-    cursor:pointer;
+.pointer {
+    cursor: pointer;
 }
 
-.fs-09{
+.fs-09 {
     font-size: .9rem;
+}
+
+.pb-10 {
+    padding-bottom: 10rem;
+}
+
+.pt-10 {
+    padding-top: 10rem;
+}
+
+.pt-6 {
+    padding-top: 6rem;
 }
 
 .bx-share-alt:hover, .bx-heart:hover {
@@ -80,9 +92,56 @@ a:hover {
         color: #fff;
     }
 
+.btn-white-secondary {
+    background-color: #fff;
+    color: #111;
+}
+
+    .btn-white-secondary:hover {
+        background-color: #79dfc1;
+        border-color: #79dfc1;
+        color: #fff;
+    }
+
 .card-action {
     position: absolute;
     top: 1.25rem;
     z-index: 1;
     right: 1.25rem;
 }
+
+#loginBackground {
+    background: url(../../images/LoginBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.btn-outline-dark-active {
+    border-color: #212529;
+    color: #fff;
+    background-color: #212529;
+}
+
+.btn-outline-white {
+    background-color: white !important;
+    border: 1px solid white;
+    color: #212529 !important;
+}
+
+    .btn-outline-white:hover {
+        background-color: #212529 !important;
+        border: 1px solid #212529 !important;
+        color: white !important;
+    }
+
+.btn-outline-black {
+    background-color: #212529 !important;
+    color: white !important;
+    border-color: #212529 !important;
+}
+
+    .btn-outline-black:hover {
+        background-color: white !important;
+        color: #212529 !important;
+        border-color: #212529 !important;
+    }

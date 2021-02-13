@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ECommerceSocks_ASPNetCore.Controllers {
-    public class AccountController : Controller {
+    public class IdentityController : Controller {
         public IActionResult Index () {
             return View();
         }
@@ -20,6 +20,22 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
 
         public IActionResult GetWishlistPartial () {
             return PartialView("_OrderWishlistPartial");
+        }
+
+        public IActionResult LogOut (bool? logout) {
+            if(logout == null) {
+                return PartialView("_UserLogoutPartial");
+            } else {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public IActionResult UserPersonalInfo () {
+            return PartialView("_UserPersonalInfoPartial");
+        }
+
+        public IActionResult UserAddresses () {
+            return PartialView("_UserAddressesPartial");
         }
     }
 }

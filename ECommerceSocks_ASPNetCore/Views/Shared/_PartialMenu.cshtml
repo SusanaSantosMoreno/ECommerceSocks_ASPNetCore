@@ -1,11 +1,17 @@
 ﻿<li class="w-50 mx-auto row nav-icons">
     <i class='bx bx-search bx-sm text-end col nav-icon m-auto'></i>
     <i class='bx bx-heart bx-sm text-center col nav-icon m-auto'></i>
-    <a class="user-icon mx-2" style="margin-top: 7px; color:white !important;" asp-action="Index" asp-controller="Account">
-        <span class="user_letter">S</span>
-    </a>
-    <!--<i class='bx bx-user bx-sm text-center col nav-icon m-auto' id="loginBtn"
-           data-bs-toggle="modal" data-bs-target="#userModal"></i>-->
+    
+    @if (Context.Session.GetInt32("user")!= null) {
+        <a class="user-icon mx-2" style="margin-top: 7px; color:white !important;" 
+           asp-action="Index" asp-controller="Identity">
+            <span class="user_letter">S</span>
+        </a>
+    } else {
+        <a class="col nav-icon m-auto text-center mt-2" href="@Url.Action("Login", "User")">
+            <i class='bx bx-user bx-sm' id="loginBtn"></i>
+        </a>
+    }
     <i class='bx bx-shopping-bag bx-sm col pe-0 nav-icon m-auto'
        data-bs-toggle="modal" data-bs-target="#modal_aside_right"></i>
 </li>

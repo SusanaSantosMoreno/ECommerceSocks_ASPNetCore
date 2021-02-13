@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class HomeController : Controller {
 
-        private Ecommerce_socksRepository repository;
+        private IRepositoryEcommerce_socks repository;
 
-        public HomeController( Ecommerce_socksRepository repo ) {
+        public HomeController(IRepositoryEcommerce_socks repo ) {
             this.repository = repo;
         }
 

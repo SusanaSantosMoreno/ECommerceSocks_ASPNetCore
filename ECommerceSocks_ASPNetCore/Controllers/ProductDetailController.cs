@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class ProductDetailController : Controller {
 
-        private Ecommerce_socksRepository repository;
+        private IRepositoryEcommerce_socks repository;
 
-        public ProductDetailController (Ecommerce_socksRepository repo) {
+        public ProductDetailController (IRepositoryEcommerce_socks repo) {
             this.repository = repo;
         }
         public IActionResult Index (int product_id) {

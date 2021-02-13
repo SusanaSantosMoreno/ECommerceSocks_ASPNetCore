@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,14 @@ namespace ECommerceSocks_ASPNetCore.Helpers {
                 bf.Serialize(ms, obj);
                 return ms.ToArray();
             }
+        }
+
+        public static String SerializeJsonObject (object obj) {
+            return JsonConvert.SerializeObject(obj);
+        }
+
+        public static T DeserializeJsonObject<T> (String jsonObj) {
+            return JsonConvert.DeserializeObject<T>(jsonObj);
         }
     }
 }

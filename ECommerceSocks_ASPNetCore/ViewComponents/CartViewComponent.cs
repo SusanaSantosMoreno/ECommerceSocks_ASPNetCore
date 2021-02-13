@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 namespace ECommerceSocks_ASPNetCore.ViewComponents {
     public class CartViewComponent : ViewComponent {
 
-        Ecommerce_socksRepository repository;
+        IRepositoryEcommerce_socks repository;
 
-        public CartViewComponent(Ecommerce_socksRepository repo) {
+        public CartViewComponent(IRepositoryEcommerce_socks repo) {
             this.repository = repo;
         }
 

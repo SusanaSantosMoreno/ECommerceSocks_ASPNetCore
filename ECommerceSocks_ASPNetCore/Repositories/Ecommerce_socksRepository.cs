@@ -1,5 +1,8 @@
 ﻿using ECommerceSocks_ASPNetCore.Data;
+using ECommerceSocks_ASPNetCore.Helpers;
 using ECommerceSocks_ASPNetCore.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +10,14 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace ECommerceSocks_ASPNetCore.Repositories {
-    public class Ecommerce_socksRepository {
+    public class Ecommerce_socksRepository: IRepositoryEcommerce_socks {
 
         private Ecommerce_socksContext context;
+        private IMemoryCache memoryCache;
 
-        public Ecommerce_socksRepository(Ecommerce_socksContext context ) {
+        public Ecommerce_socksRepository(Ecommerce_socksContext context, IMemoryCache memoryCache) {
             this.context = context;
+            this.memoryCache = memoryCache;
         }
 
         #region PRODUCTS
@@ -44,8 +49,7 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         }
 
         public List<String> GetProductsStyles () {
-            var consulta = this.GetProducts().Select(x => x.Product_style).Distinct();
-            return consulta.ToList();
+            return this.GetProducts().Select(x => x.Product_style).Distinct().ToList();
         }
 
         public List<String> GetProductsPrint () {
@@ -100,9 +104,15 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
 
         #region CATEGORIES
         public List<Category> GetCategories() {
-            var consulta = from datos in this.context.categories
-                           select datos;
-            return consulta.ToList();
+            List<Category> categories = new List<Category>();
+            if (this.memoryCache.Get("Categories") == null) {
+                categories = this.context.categories.ToList();
+                this.memoryCache.Set("Categories", ToolkitService.SerializeJsonObject(categories));
+            } else {
+                categories = ToolkitService.
+                    DeserializeJsonObject<List<Category>>(this.memoryCache.Get("Categories").ToString());
+            }
+            return categories;
         }
 
         public Category GetCategory(int categoryId ) {
@@ -116,9 +126,15 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         #region SUBCATEGORIES
 
         public List<Subcategory> GetSubcategories () {
-            var consulta = from datos in this.context.subcategories
-                           select datos;
-            return consulta.ToList();
+            List<Subcategory> subcategories = new List<Subcategory>();
+            if(this.memoryCache.Get("Subcategories") == null) {
+                subcategories = this.context.subcategories.ToList();
+                this.memoryCache.Set("Subcategories", ToolkitService.SerializeJsonObject(subcategories));
+            } else {
+                subcategories = ToolkitService.DeserializeJsonObject<List<Subcategory>>
+                    (this.memoryCache.Get("Subcategories").ToString());
+            }
+            return subcategories;
         }
 
         public Subcategory GetSubcategory(int subcategory_id) {
@@ -176,7 +192,24 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
             }
             return randomValue;
         }
-    
-        
+
+        #region USERS
+        public bool AddUser (string email, string name, string password, string repeatPassword) {
+            if (password == repeatPassword) {
+                Users user = new Users(name, email, password);
+                this.context.users.Add(user);
+                this.context.SaveChanges();
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public Users GetUser (string email, string password) {
+            return this.context.users.
+                Where(x => x.Users_email == email && x.User_password == password).
+                FirstOrDefault();
+        }
+        #endregion
     }
 }

@@ -2,7 +2,9 @@
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a></li>
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a>
+                </li>
                 <li class="breadcrumb-item" style="color:#6c757d">My Account</li>
             </ol>
         </nav>
@@ -28,7 +30,7 @@
                     </a>
                 </li>
                 <li class="list-group-item border-start-0 border-end-0">
-                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
+                    <a id="userPersonalInfo" class="text-muted pointer">
                         <div class="w-100 row">
                             <span class="col-10">Personal Info</span>
                             <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
@@ -36,7 +38,7 @@
                     </a>
                 </li>
                 <li class="list-group-item border-start-0 border-end-0">
-                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
+                    <a id="userAddresses" class="text-muted pointer">
                         <div class="w-100 row">
                             <span class="col-10">Addresses</span>
                             <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
@@ -44,15 +46,7 @@
                     </a>
                 </li>
                 <li class="list-group-item border-start-0 border-end-0">
-                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
-                        <div class="w-100 row">
-                            <span class="col-10">Payment Method</span>
-                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item border-start-0 border-end-0">
-                    <a asp-action="Index" asp-controller="Home" class="text-muted pointer">
+                    <a id="logout" class="text-muted pointer">
                         <div class="w-100 row">
                             <span class="col-10">Logout</span>
                             <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
@@ -68,19 +62,27 @@
 @section scripts {
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#accountCategoryViews").load("/Account/GetOrdersPartial");
+        $("#accountCategoryViews").load("/Identity/GetOrdersPartial");
 
-        $("#AccountOrdersLink").click(function () {
-            $("#accountCategoryViews").load("/Account/GetOrderDetailsPartial");
-        });
+        $(".list-group-item a").click(function () {
+            $(".list-group-item a").addClass("text-muted");
+            $(".list-group-item a").removeClass("fw-bold");
 
-        $("#AccountWishlistLink").click(function () {
-            $("#accountCategoryViews").load("/Account/GetWishlistPartial");
-        });
+            $(this).removeClass("text-muted");
+            $(this).addClass("fw-bold");
 
-        /*$("#orderDetailsBtn").click(function () {
-            $("#orderDetails").load("/Account/GetOrderDetailsPartial");
-        });*/
+            if ($(this).attr("id") == 'AccountOrdersLink') {
+                $("#accountCategoryViews").load("/Identity/GetOrderDetailsPartial");
+            } else if ($(this).attr("id") == 'AccountWishlistLink') {
+                $("#accountCategoryViews").load("/Identity/GetWishlistPartial");
+            } else if ($(this).attr("id") == 'logout') {
+                $("#accountCategoryViews").load("/Identity/LogOut");
+            } else if ($(this).attr("id") == 'userPersonalInfo') {
+                $("#accountCategoryViews").load("/Identity/UserPersonalInfo");
+            } else if ($(this).attr("id") == 'userAddresses') {
+                $("#accountCategoryViews").load("/Identity/UserAddresses");
+            }
+        })
     });
 </script>
 }
