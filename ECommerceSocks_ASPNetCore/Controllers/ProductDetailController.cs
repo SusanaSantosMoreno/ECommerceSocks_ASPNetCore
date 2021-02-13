@@ -13,17 +13,28 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
     public class ProductDetailController : Controller {
 
         private IRepositoryEcommerce_socks repository;
+        private PathProvider provider;
+        private CachingService cachingService;
 
-        public ProductDetailController (IRepositoryEcommerce_socks repo) {
+        public ProductDetailController (IRepositoryEcommerce_socks repo, PathProvider provider, 
+            CachingService caching) {
             this.repository = repo;
+            this.cachingService = caching;
+            this.provider = provider;
         }
-        public IActionResult Index (int product_id) {
+        public IActionResult Index (int product_id, int? favorite) {
+            if (favorite != null) {
+                this.cachingService.saveFavoritesCache((int)favorite);
+            }
             Product_Complete product = this.repository.GetProduct_Complete(product_id);
-            List<Product_Complete> products = this.repository.
-                GetProduct_CompletesByCategory((int)product.Product_category);
+            List<Product_Complete> products = product.Product_category != 4 ? this.repository.
+                GetProduct_CompletesByCategory((int)product.Product_category) : 
+                this.repository.GetProduct_Completes();
             ViewData["Products"] = products;
             List<Product_sizes> productSizes = this.repository.GetProduct_Sizes_Views(product.Product_id);
             ViewData["ProductSize"] = productSizes;
+            List<String> imgs = this.provider.FindFiles("Product_" + product.Product_id, @"images/products");
+            ViewData["Images"] = imgs;
             return View(product);
         }
 

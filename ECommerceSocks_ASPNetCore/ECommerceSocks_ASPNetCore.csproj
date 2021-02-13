@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\lib\css\layout.css" />
-    <Content Remove="wwwroot\images\Products\women-banner.jpg" />
+    <Content Remove="wwwroot\images\products\women-banner.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="wwwroot\lib\css\layout.css">

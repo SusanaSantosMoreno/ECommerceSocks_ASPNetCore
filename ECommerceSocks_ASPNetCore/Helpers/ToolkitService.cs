@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,5 +37,7 @@ namespace ECommerceSocks_ASPNetCore.Helpers {
         public static T DeserializeJsonObject<T> (String jsonObj) {
             return JsonConvert.DeserializeObject<T>(jsonObj);
         }
+
+
     }
 }

@@ -211,5 +211,18 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
                 FirstOrDefault();
         }
         #endregion
+
+        #region FAVORITES
+        public void AddFavorite (int product_id, int user_id) {
+            int lastId = this.context.favorites.OrderByDescending(x => x.Favorite_id).FirstOrDefault().Favorite_id;
+            Favorite fav = new Favorite((lastId + 1), product_id, user_id);
+            this.context.favorites.Add(fav);
+            this.context.SaveChanges();
+        }
+
+        public List<Favorite> GetFavorites () {
+            return this.context.favorites.ToList();
+        }
+        #endregion
     }
 }

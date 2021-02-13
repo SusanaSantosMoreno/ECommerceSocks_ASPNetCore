@@ -13,13 +13,16 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
 
         private IRepositoryEcommerce_socks repository;
         private IMemoryCache memoryCache;
+        private CachingService cachingService;
 
-        public CategorySectionController (IRepositoryEcommerce_socks repo, IMemoryCache memoryCache) {
+        public CategorySectionController (IRepositoryEcommerce_socks repo, 
+            IMemoryCache memoryCache, CachingService caching) {
             this.repository = repo;
             this.memoryCache = memoryCache;
+            this.cachingService = caching;
         }
 
-        public IActionResult Index(int category_id, int? subcategory_id) {
+        public IActionResult Index(int category_id, int? subcategory_id, int? favorite) {
             List<Product_Complete> products = repository.GetProduct_CompletesByCategory(category_id);
             Category category = this.repository.GetCategory(category_id);
             ViewData["Category"] = category;
@@ -38,6 +41,10 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             ViewData["Print"] = print;
             List<String> color = this.repository.GetProductColor();
             ViewData["Color"] = color;
+
+            if (favorite != null) {
+                this.cachingService.saveFavoritesCache((int)favorite);
+            }
             return View(products);
         }
 

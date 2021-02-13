@@ -50,5 +50,10 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         public bool AddUser (String email, String name, String password, String repeatPassword);
         public Users GetUser (String email, String password);
         #endregion
+
+        #region FAVORITES
+        public void AddFavorite (int product_id, int user_id);
+        public List<Favorite> GetFavorites ();
+        #endregion
     }
 }

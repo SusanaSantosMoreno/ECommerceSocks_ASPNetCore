@@ -56,15 +56,17 @@
     </div>
     <div class="container-lg mt-4 row mx-auto px-0">
         @foreach (Category category in categories) {
-        <a asp-action="Index" asp-controller="CategorySection" 
-           asp-route-category_id="@category.Category_id" class="col-lg category_link">
-            <div id="@category.Category_name.ToLower()Portrait" class="me-3 portrait mb-3">
-                <div class="portrait-text ms-4">
-                    <h3>Shop</h3>
-                    <h1>@category.Category_name.ToUpper()</h1>
-                </div>
-            </div>
-        </a>
+            if (category.Category_id != 4) {
+                <a asp-action="Index" asp-controller="CategorySection"
+                   asp-route-category_id="@category.Category_id" class="col-lg category_link">
+                    <div id="@category.Category_name.ToLower()Portrait" class="me-3 portrait mb-3">
+                        <div class="portrait-text ms-4">
+                            <h3>Shop</h3>
+                            <h1>@category.Category_name.ToUpper()</h1>
+                        </div>
+                    </div>
+                </a>
+            }
         }
     </div>
     <div class="container-lg mt-3 mx-auto mb-5" id="packsPortrait">
@@ -72,7 +74,8 @@
             <h1 class="fw-bolder">PICK A PACK</h1>
             <p class="fs-4">4, 6 or 10 pairs</p>
             <h3 class="text-blue fw-bolder">Save up to 20%</h3>
-            <button type="button" class="btn btn-dark m-0 mt-2 w-100">PACKS</button>
+            <a class="btn btn-dark m-0 mt-2 w-100" asp-action="Index" asp-controller="CategorySection"
+                   asp-route-category_id="4">PACKS</a>
         </div>
     </div>
     <!--ITEMS CARROUSEL-->
@@ -104,7 +107,9 @@
                                             <div class="row m-0">
                                                 <h5 class="col m-0 p-0 fw-semibold">@product.Product_name.ToUpper()</h5>
                                                 <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
-                                                <i class="bx bx-sm bx-heart col-2 m-0 p-0 text-end pointer fav_icon"></i>
+                                                <a  class="col-2" asp-action="Index" asp-controller="Home" asp-route-favorite="@product.Product_id">
+                                                    <i class="bx bx-sm bx-heart m-0 p-0 text-end pointer fav_icon"></i>
+                                                </a>
                                             </div>
                                             <p class="text-muted m-0 fs-09 fw-semibold">@product.Subcategory_name · @product.Product_color</p>
                                             <p class="m-0 fw-semibold">$@product.Product_price</p>
@@ -118,11 +123,11 @@
                 }
 
             </div>
-            <a class="carousel-control-prev" href="#lastItemsCarrousel" role="button" data-bs-slide="prev">
+            <a class="carousel-control-prev w-10" href="#lastItemsCarrousel" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#lastItemsCarrousel" role="button" data-bs-slide="next">
+            <a class="carousel-control-next w-10" href="#lastItemsCarrousel" role="button" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </a>

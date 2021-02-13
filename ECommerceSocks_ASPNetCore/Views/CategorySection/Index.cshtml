@@ -12,115 +12,132 @@
 </head>
 <section id="category" class="container-lg mt-5">
     <div class="category_header" id="category_header_@category.Category_name.ToLower()">
-        <div class="category_header_text">
-            <h1>@category.Category_name.ToUpper()'S SOCKS</h1>
+
+        @if (category.Category_id == 4) {
+        <div class="category_header_packs_text mb-5">
+            <h1>ALL OUR PACKS</h1>
             <h5 class="w-50">@category.Category_description</h5>
         </div>
+        } else {
+    <div class="category_header_text">
+        <h1>@category.Category_name.ToUpper()'S SOCKS</h1>
+        <h5 class="w-50">@category.Category_description</h5>
     </div>
-    <div id="subcategories" class="mt-2 mb-5 row mx-auto">
-        @foreach (Subcategory subcategory in subcategories) {
-            <div class="col bg-light-grey me-2 subcategory">
-                <div class="row mb-2">
-                    <div class="col-8">
-                        <h6>@subcategory.Subcategory_name.ToUpper()</h6>
-                        <a class="subcategory_select" asp-action="Index"
-                           asp-controller="CategorySection" asp-route-category_id="@category.Category_id"
-                           asp-route-subcategory_id="@subcategory.Subcategory_id">See Products</a>
-                    </div>
-                    <img src="~/icons/@(subcategory.Subcategory_name.ToLower()).svg" class="img-fluid col-3" />
-                </div>
-            </div>
         }
     </div>
-    <div id="products_section" class="row mb-5">
-        <div id="filter_section" class="col-3">
-            <ul>
-                <li>
-                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse_style" aria-expanded="false"
-                            aria-controls="collapse_style">
-                        <span class="text-bold me-2">STYLE</span><i class='bx bx-plus'></i>
-                    </button>
-                </li>
-
-                <!--Style filter-->
-                <div class="collapse ms-2 collapse-items" id="collapse_style">
-                    <ul>
-                        @foreach (String style in styles) {
-                            <li class="mb-1"><a data-clicked="1" data-active="0" class="pointer filter">@style</a></li>
-                        }
-                    </ul>
-                </div>
-                <li>
-                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse_pattern" aria-expanded="false"
-                            aria-controls="collapse_pattern">
-                        <span class="text-bold me-2">PRINT</span><i class='bx bx-plus'></i>
-                    </button>
-                </li>
-
-                <!--Print filter-->
-                <div class="collapse ms-2 collapse-items" id="collapse_pattern">
-                    <ul>
-                        @foreach (String print in prints) {
-                            <li class="mb-1"><a data-active="0" data-clicked="1" class="pointer filter">@print</a></li>
-                        }
-                    </ul>
-                </div>
-                <li>
-                    <button class="btn-transparent" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse_color" aria-expanded="false"
-                            aria-controls="collapse_color">
-                        <span class="text-bold me-2">COLOR</span><i class='bx bx-plus'></i>
-                    </button>
-                </li>
-
-                <!--Color filter-->
-                <div class="collapse ms-2 collapse-items" id="collapse_color">
-                    <div class="row g-4 align-items-center w-50">
-                        @foreach (String color in colors) {
-                            <div class="col">
-                                <a data-active="0" data-clicked="1" class="pointer filter-color">
-                                    <svg height="40" width="40">
-                                        <circle cx="20" cy="20" r="15" stroke="grey" stroke-width="1"
-                                                fill="@color.Replace(" ", String.Empty)" />
-                                    </svg>
-                                </a>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </ul>
-        </div>
-        <div id="product_list_section" class="col-9">
-            <div class="row row-cols-3">
-                @foreach (Product_Complete product in Model) {
-                    <div class="card border border-white col mb-3">
-                        <div class="card-body">
-                            <div class="img-hover-zoom">
-                                <a asp-controller="ProductDetail" asp-action="Index"
-                                   asp-route-product_id="@product.Product_id">
-                                    <img src="~/images/Products/Product_@(product.Product_id).jpg"
-                                         class="img-fluid mx-auto d-block w-75"
-                                         alt="img">
-                                </a>
-                            </div>
-                            <div id="product_content" class="mt-4 f-raleway">
-                                <div class="row m-0">
-                                    <h5 class="col m-0 p-0 fw-semibold">@product.Product_name.ToUpper()</h5>
-                                    <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
-                                    <i class="bx bx-sm bx-heart col-2 m-0 p-0 text-end pointer fav_icon"></i>
+            @if (category.Category_id != 4) {
+                <div id="subcategories" class="mt-2 mb-5 row mx-auto">
+                    @foreach (Subcategory subcategory in subcategories) {
+                        <div class="col bg-light-grey me-2 subcategory">
+                            <div class="row mb-2">
+                                <div class="col-8">
+                                    <h6>@subcategory.Subcategory_name.ToUpper()</h6>
+                                    <a class="subcategory_select" asp-action="Index"
+                                       asp-controller="CategorySection" asp-route-category_id="@category.Category_id"
+                                       asp-route-subcategory_id="@subcategory.Subcategory_id">See Products</a>
                                 </div>
-                                <p class="text-muted m-0 fs-09 fw-semibold">@product.Subcategory_name · @product.Product_color</p>
-                                <p class="m-0 fw-semibold">$@product.Product_price</p>
-                                <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                                <img src="~/icons/@(subcategory.Subcategory_name.ToLower()).svg" class="img-fluid col-3" />
                             </div>
                         </div>
+                    }
+                </div>
+            }
+
+            <div id="products_section" class="row mb-5">
+                @if (category.Category_id != 4) {
+                    <div id="filter_section" class="col-3">
+                        <ul>
+                            <li>
+                                <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse_style" aria-expanded="false"
+                                        aria-controls="collapse_style">
+                                    <span class="text-bold me-2">STYLE</span><i class='bx bx-plus'></i>
+                                </button>
+                            </li>
+
+                            <!--Style filter-->
+                            <div class="collapse ms-2 collapse-items" id="collapse_style">
+                                <ul>
+                                    @foreach (String style in styles) {
+                                        <li class="mb-1"><a data-clicked="1" data-active="0" class="pointer filter">@style</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <li>
+                                <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse_pattern" aria-expanded="false"
+                                        aria-controls="collapse_pattern">
+                                    <span class="text-bold me-2">PRINT</span><i class='bx bx-plus'></i>
+                                </button>
+                            </li>
+
+                            <!--Print filter-->
+                            <div class="collapse ms-2 collapse-items" id="collapse_pattern">
+                                <ul>
+                                    @foreach (String print in prints) {
+                                        <li class="mb-1"><a data-active="0" data-clicked="1" class="pointer filter">@print</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <li>
+                                <button class="btn-transparent" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse_color" aria-expanded="false"
+                                        aria-controls="collapse_color">
+                                    <span class="text-bold me-2">COLOR</span><i class='bx bx-plus'></i>
+                                </button>
+                            </li>
+
+                            <!--Color filter-->
+                            <div class="collapse ms-2 collapse-items" id="collapse_color">
+                                <div class="row g-4 align-items-center w-50">
+                                    @foreach (String color in colors) {
+                                        <div class="col">
+                                            <a data-active="0" data-clicked="1" class="pointer filter-color">
+                                                <svg height="40" width="40">
+                                                    <circle cx="20" cy="20" r="15" stroke="grey" stroke-width="1"
+                                                            fill="@color.Replace(" ", String.Empty)" />
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </ul>
                     </div>
                 }
+                <div id="product_list_section" class="@(category.Category_id!=4 ? "col-9" : "")">
+                    <div class="row row-cols-3">
+                        @foreach (Product_Complete product in Model) {
+                            <div class="card border border-white col mb-3">
+                                <div class="card-body">
+                                    <div class="img-hover-zoom">
+                                        <a asp-controller="ProductDetail" asp-action="Index"
+                                           asp-route-product_id="@product.Product_id">
+                                            <img src="~/images/Products/Product_@(product.Product_id).jpg"
+                                                 class="img-fluid mx-auto d-block w-75"
+                                                 alt="img">
+                                        </a>
+                                    </div>
+                                    <div id="product_content" class="mt-4 f-raleway">
+                                        <div class="row m-0">
+                                            <h5 class="col m-0 p-0 fw-semibold">@product.Product_name.ToUpper()</h5>
+                                            <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
+                                            <a class="col-2" asp-action="Index" asp-controller="CategorySection" 
+                                               asp-route-favorite="@product.Product_id" 
+                                               asp-route-category_id="@product.Product_category">
+                                                <i class="bx bx-sm bx-heart m-0 p-0 text-end pointer fav_icon"></i>
+                                            </a>    
+                                        </div>
+                                        <p class="text-muted m-0 fs-09 fw-semibold">@product.Subcategory_name · @product.Product_color</p>
+                                        <p class="m-0 fw-semibold">$@product.Product_price</p>
+                                        <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 </section>
 
 <!--SCRIPTS-->

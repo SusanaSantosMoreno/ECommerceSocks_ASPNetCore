@@ -14,18 +14,15 @@ namespace ECommerceSocks_ASPNetCore.Models {
         public int Order_id { get; set; }
         [Column("Product_id")]
         public int Product_id { get; set; }
-        [Column("Pack_id")]
-        public int Pack_id { get; set; }
         [Column("Amount")]
         public int Amount { get; set; }
 
         public Order_details() { }
 
         public Order_details( int order_id, int product_id, 
-            int pack_id, int amount ) {
+            int amount ) {
             Order_id = order_id;
             Product_id = product_id;
-            Pack_id = pack_id;
             Amount = amount;
         }
     }

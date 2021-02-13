@@ -24,6 +24,25 @@
     position: relative;
 }
 
+#category_header_packs {
+    background: url(../../images/packs_banner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    position: relative;
+}
+
+.category_header_packs_text {
+    font-family: 'Raleway', sans-serif !important;
+    margin: 0;
+    position: absolute;
+    margin-left: 40% !important;
+    color: white;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
 .category_header_text {
     font-family: 'Raleway', sans-serif !important;
     margin: 0;

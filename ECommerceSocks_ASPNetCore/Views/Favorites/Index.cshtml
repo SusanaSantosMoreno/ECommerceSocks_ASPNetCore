@@ -1,0 +1,47 @@
+﻿@model List<Product_Complete> 
+<div class="container mt-5 pt-5 mb-5 f-raleway">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a>
+                </li>
+                <li class="breadcrumb-item" style="color:#6c757d">My Favorites</li>
+            </ol>
+        </nav>
+        <h2 class="mb-5 text-center">My Favorites</h2>
+    </div>
+    
+    <div id="favorites">
+        <div class="row">
+            @foreach (Product_Complete fav in Model) {
+                <div class="card border border-white col-4 mb-3">
+                    <a asp-action="Index" asp-controller="Favorites" asp-route-disfav="@fav.Product_id"
+                       class="btn btn-xs btn-circle btn-white-primary card-action ms-auto">
+                        <i class='bx bx-x bx-sm'></i>
+                    </a>
+                    <div class="card-body">
+                        <div class="img-hover-zoom">
+                            <a asp-controller="ProductDetail" asp-action="Index" 
+                               asp-route-product_id="@fav.Product_id">
+                                <img src="~/images/Products/Product_@(fav.Product_id).jpg" 
+                                     class="img-fluid mx-auto d-block w-75" alt="img">
+                            </a>
+                        </div>
+                        <div id="product_content" class="mt-4 f-raleway">
+                            <div class="row m-0">
+                                <h5 class="col m-0 p-0 fw-semibold">@fav.Product_name</h5>
+                                <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
+                            </div>
+                            <p class="text-muted m-0 fs-09 fw-semibold">
+                                @fav.Product_subcategory · @fav.Product_color
+                            </p>
+                            <p class="m-0 fw-semibold">$@fav.Product_price</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

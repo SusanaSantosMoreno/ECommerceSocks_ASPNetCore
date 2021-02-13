@@ -26,6 +26,8 @@ namespace ECommerceSocks_ASPNetCore {
             String cadena = configuration.GetConnectionString("EcommerceSocks_Azure");
             services.AddTransient<IRepositoryEcommerce_socks, Ecommerce_socksRepository>();
             services.AddDbContext<Ecommerce_socksContext>(options => options.UseSqlServer(cadena));
+            services.AddSingleton<PathProvider>();
+            services.AddSingleton<CachingService>();
 
             /*CACHING*/
             services.AddMemoryCache();

@@ -17,7 +17,6 @@ namespace ECommerceSocks_ASPNetCore.Data {
         public DbSet<Favorite> favorites { get; set; }
         public DbSet<Order_details> order_details { get; set; }
         public DbSet<Orders> orders { get; set; }
-        public DbSet<Pack> packs { get; set; }
         public DbSet<Product> products { get; set; }
         public DbSet<Product_size> product_sizes { get; set; }
         public DbSet<Size> size { get; set; }
