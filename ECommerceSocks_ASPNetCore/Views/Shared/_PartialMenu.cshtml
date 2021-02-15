@@ -1,19 +1,19 @@
-﻿<li class="w-50 mx-auto row nav-icons">
-    <i class='bx bx-search bx-sm text-end col nav-icon m-auto'></i>
+﻿<div class="me-5 row nav-icons">
+    <!--<i class='bx bx-search bx-sm text-end col nav-icon m-auto'></i>-->
     <a class="col nav-icon m-auto text-center mt-2" asp-action="Index" asp-controller="Favorites">
         <i class='bx bx-heart bx-sm'></i>
     </a>
-    @if (Context.Session.GetInt32("user") != null) {
+    @if (Context.User.Identity.IsAuthenticated) {
         <a class="user-icon mx-2" style="margin-top: 7px; color:white !important;"
            asp-action="Index" asp-controller="Identity">
-            <span class="user_letter">S</span>
+            <span class="user_letter">@User.Identity.Name.ToUpper()[0]</span>
         </a>
     } else {
-        <a class="col nav-icon m-auto text-center mt-2" href="@Url.Action("Login", "User")">
+        <a class="col nav-icon m-auto text-center mt-2" asp-action="Index" asp-controller="Identity">
             <i class='bx bx-user bx-sm' id="loginBtn"></i>
         </a>
     }
     <a class="col nav-icon m-auto text-center mt-2" asp-action="Index" asp-controller="Cart">
         <i class='bx bx-shopping-bag bx-sm'></i>
     </a>
-</li>
+</div>

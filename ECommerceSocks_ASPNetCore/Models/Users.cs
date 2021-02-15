@@ -17,7 +17,10 @@ namespace ECommerceSocks_ASPNetCore.Models {
 
         [Column("Users_name")]
         public String Users_name { get; set; }
-        
+
+        [Column("Users_lastName")]
+        public String Users_lastName { get; set; }
+
         [Column("Users_email")]
         public String Users_email { get; set; }
 

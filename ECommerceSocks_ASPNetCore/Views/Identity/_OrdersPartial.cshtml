@@ -1,61 +1,35 @@
-﻿
-<div class="card card-lg mb-5 border w-80 mx-auto">
-    <div class="card-body pb-0 p-4">
-        <!--ORDER INFO-->
-        <div class="card card-sm border-0">
-            <div class="card-body bg-light">
-                <div class="row">
-                    <div class="col-6 col-lg-4">
-                        <h6 class="text-muted">Order No:</h6>
-                        <p class="mb-lg-0 font-size-sm fw-semibold">673290789</p>
-                    </div>
-                    <div class="col-6 col-lg-4">
-                        <h6 class="text-muted">Shipped date:</h6>
-                        <p class="mb-lg-0 font-size-sm fw-semibold">01 Oct, 2019</p>
-                    </div>
-                    <div class="col-6 col-lg-4">
-                        <h6 class="text-muted">Order Amount:</h6>
-                        <p class="mb-lg-0 font-size-sm fw-semibold">$259.00</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="card-footer bg-white border-top-0 mt-3" id="orderDetails">
-        <div class="row align-items-center">
-            <div class="col-6">
-                <div class="row mb-4">
-                    <div class="col-3">
-                        <img src="~/images/Products/Product_1.jpg" class="img-fluid" />
-                    </div>
-                    <div class="col-3">
-                        <img src="~/images/Products/Product_12.jpg" class="img-fluid" />
-                    </div>
-                    <div class="col-3">
-                        <img src="~/images/Products/Product_8.jpg" class="img-fluid" />
-                    </div>
-                    <div class="col-3 bg-light text-center fw-bold">
-                        <span> + 2 more</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="row mb-4 me-1">
-                    <div class="col-6 ms-auto">
-                        <a class="btn btn-outline-dark w-100 fw-semibold" id="orderDetailsBtn">Order Details</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-@section scripts {
-<script type="text/javascript"> 
-    $(document).ready(function () {
-        $("#orderDetailsBtn").click(function () {
-            $("#orderDetails").load("/Account/GetOrderDetailsPartial");
-        });
-    });
-</script>
+﻿@model List<Orders>
+@{
+    List<float> finalPrices = ViewData["finalPrices"] as List<float>;
 }
+@foreach(Orders order in Model) { 
+    <div class="card card-lg mb-5 border w-80 mx-auto">
+        <div class="card-body pb-0 p-4">
+            <!--ORDER INFO-->
+            <div class="card card-sm border-0">
+                <div class="card-body bg-light">
+                    <div class="row">
+                        <div class="col-6 col-lg-6">
+                            <h6 class="text-muted">Order No:</h6>
+                            <p class="mb-lg-0 font-size-sm fw-semibold">@order.Orders_id</p>
+                        </div>
+                        <div class="col-6 col-lg-6">
+                            <h6 class="text-muted">Shipped date:</h6>
+                            <p class="mb-lg-0 font-size-sm fw-semibold">
+                                @order.Orders_date.ToString("dd MMMM, yyyy")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-white border-top-0 mt-3" id="orderDetails">
+            <div class="mb-3 ms-2">
+                <a class="btn btn-outline-dark w-25 fw-semibold" id="orderDetailsBtn"
+                   asp-action="OrderDetails" asp-controller="Identity"
+                   asp-route-order_id="@order.Orders_id">Order Details</a>
+            </div>
+        </div>
+    </div>
+}
+

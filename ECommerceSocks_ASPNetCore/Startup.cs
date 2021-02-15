@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using ECommerceSocks_ASPNetCore.Data;
 using ECommerceSocks_ASPNetCore.Helpers;
 using ECommerceSocks_ASPNetCore.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +31,16 @@ namespace ECommerceSocks_ASPNetCore {
             services.AddSingleton<PathProvider>();
             services.AddSingleton<CachingService>();
 
+            /*TEMPDATA*/
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+
+            /*AUTHENTICATION*/
+            services.AddAuthentication(options => {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie();
+
             /*CACHING*/
             services.AddMemoryCache();
             services.AddDistributedMemoryCache();
@@ -36,14 +48,13 @@ namespace ECommerceSocks_ASPNetCore {
 
             /*SESSION*/
             services.AddDistributedMemoryCache();
-            services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromDays(1);
-            });
+            services.AddSession();
 
             /*HELPERS*/
             services.AddSingleton<MailService>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options => options.EnableEndpointRouting = false).
+                AddSessionStateTempDataProvider();
         }
 
         
@@ -53,12 +64,14 @@ namespace ECommerceSocks_ASPNetCore {
             }
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseResponseCaching();
             app.UseSession();
-            app.UseEndpoints(endpoints => {
-                endpoints.MapControllerRoute(
+            app.UseMvc(routes => {
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}");
+                    template: "{controller=Home}/{action=Index}"
+                );
             });
         }
     }

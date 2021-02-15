@@ -1,4 +1,7 @@
-﻿<div class="container mt-5 pt-5 mb-5 f-raleway">
+﻿@{ 
+    String clicked = ViewData["Clicked"] as String;
+}
+<div class="container mt-5 pt-5 mb-5 f-raleway">
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -30,7 +33,8 @@
                     </a>
                 </li>
                 <li class="list-group-item border-start-0 border-end-0">
-                    <a id="userPersonalInfo" class="text-muted pointer">
+                    <a id="userPersonalInfo" class="text-muted pointer" asp-action="PersonalInfo"
+                       asp-controller="Identity">
                         <div class="w-100 row">
                             <span class="col-10">Personal Info</span>
                             <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
@@ -60,10 +64,22 @@
 </div>
 
 @section scripts {
-<script type="text/javascript">
-        $("#accountCategoryViews").load("/Identity/GetOrdersPartial");
+    <script type="text/javascript">
 
-        $(".list-group-item a").click(function () {
+        $(".list-group-item:nth-child(@(clicked)) a").removeClass("text-muted");
+        $(".list-group-item:nth-child(@(clicked)) a").addClass("fw-bold");
+
+        if ($(".list-group-item:nth-child(@(clicked)) a").attr("id") == 'AccountOrdersLink') {
+            $("#accountCategoryViews").load("/Identity/GetOrdersPartial");
+        } else if ($(".list-group-item:nth-child(@(clicked)) a").attr("id") == 'AccountWishlistLink') {
+            $("#accountCategoryViews").load("/Identity/GetWishlistPartial");
+        } else if ($(".list-group-item:nth-child(@(clicked)) a").attr("id") == 'logout') {
+            $("#accountCategoryViews").load("/Identity/LogOut");
+        } else if ($(".list-group-item:nth-child(@(clicked)) a").attr("id") == 'userAddresses') {
+            $("#accountCategoryViews").load("/Identity/UserAddresses");
+        }
+
+    $(".list-group-item a").click(function () {
             $(".list-group-item a").addClass("text-muted");
             $(".list-group-item a").removeClass("fw-bold");
 
@@ -71,16 +87,14 @@
             $(this).addClass("fw-bold");
 
             if ($(this).attr("id") == 'AccountOrdersLink') {
-                $("#accountCategoryViews").load("/Identity/GetOrderDetailsPartial");
+                $("#accountCategoryViews").load("/Identity/GetOrdersPartial");
             } else if ($(this).attr("id") == 'AccountWishlistLink') {
                 $("#accountCategoryViews").load("/Identity/GetWishlistPartial");
             } else if ($(this).attr("id") == 'logout') {
                 $("#accountCategoryViews").load("/Identity/LogOut");
-            } else if ($(this).attr("id") == 'userPersonalInfo') {
-                $("#accountCategoryViews").load("/Identity/UserPersonalInfo");
             } else if ($(this).attr("id") == 'userAddresses') {
                 $("#accountCategoryViews").load("/Identity/UserAddresses");
             }
-        })
-</script>
+    })
+    </script>
 }

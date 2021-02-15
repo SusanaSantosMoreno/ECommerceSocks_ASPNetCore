@@ -13,7 +13,7 @@
     </div>
     
     <div id="favorites">
-        <div class="row">
+        <div class="row w-75 mx-auto">
             @foreach (Product_Complete fav in Model) {
                 <div class="card border border-white col-4 mb-3">
                     <a asp-action="Index" asp-controller="Favorites" asp-route-disfav="@fav.Product_id"

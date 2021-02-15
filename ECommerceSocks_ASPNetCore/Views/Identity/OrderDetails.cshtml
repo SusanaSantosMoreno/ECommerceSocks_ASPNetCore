@@ -1,0 +1,167 @@
+﻿@model Orders
+@{
+    List<Order_details> order_Details = ViewData["order_details"] as List<Order_details>;
+    List<Product_Complete> products = ViewData["products"] as List<Product_Complete>;
+    List<Product_sizes> sizes = ViewData["sizes"] as List<Product_sizes>;
+    String finalPrice = ViewData["finalPrice"] as String;
+}
+<div class="container mt-5 pt-5 mb-5 f-raleway">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Identity" style="color:#6c757d">Orders</a>
+                </li>
+                <li class="breadcrumb-item" style="color:#6c757d">Order Detail</li>
+            </ol>
+        </nav>
+        <h2 class="mb-5 text-center">My Account</h2>
+    </div>
+    <div class="row" id="accountCategory">
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountOrdersLink" class="fw-bold pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="1">
+                        <div class="w-100 row">
+                            <span class="col-10">Orders</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountWishlistLink" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="2">
+                        <div class="w-100 row">
+                            <span class="col-10">WishList</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="userPersonalInfo" class="text-muted pointer" 
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="3">
+                        <div class="w-100 row">
+                            <span class="col-10">Personal Info</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="userAddresses" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="4">
+                        <div class="w-100 row">
+                            <span class="col-10">Addresses</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="logout" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="5">
+                        <div class="w-100 row">
+                            <span class="col-10">Logout</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8" id="accountCategoryViews">
+                <div class="card card-lg mb-3 border w-80 mx-auto">
+                    <div class="card-body pb-0 p-4">
+                        <!--ORDER INFO-->
+                        <div class="card card-sm border-0">
+                            <div class="card-body bg-light">
+                                <div class="row">
+                                    <div class="col-6 col-lg-3">
+                                        <h6 class="text-muted">Order No:</h6>
+                                        <p class="mb-lg-0 font-size-sm fw-semibold">@Model.Orders_id</p>
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        <h6 class="text-muted">Shipped date:</h6>
+                                        <p class="mb-lg-0 font-size-sm fw-semibold">
+                                            @Model.Orders_date.ToString("dd MMMM, yyyy")
+                                        </p>
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        <h6 class="text-muted">Status:</h6>
+                                        <p class="mb-lg-0 font-size-sm fw-semibold">Awating Delivery</p>
+                                    </div>
+                                    <div class="col-6 col-lg-3">
+                                        <h6 class="text-muted">Order Amount:</h6>
+                                        <p class="mb-lg-0 font-size-sm fw-semibold">$ @finalPrice</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-top-0 mt-3 px-4">
+                        <h5 class="mb-3 fw-semibold">Order Items (@products.Count)</h5>
+                        <ul class="list-group mb-3">
+                            @for (int i = 0; i < products.Count; i++) {
+                                <li class="list-group-item border-start-0 border-end-0">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="~/images/Products/Product_@(products[i].Product_id).jpg"
+                                                 class="img-fluid" />
+                                        </div>
+                                        <div class="col-md-9">
+                                            <h6 class="fw-semibold">@products[i].Product_name</h6>
+                                            <h6 class="text-muted mb-3 fw-semibold">
+                                                $@products[i].Product_price
+                                            </h6>
+                                            <p class="text-muted mb-0 fw-500">Size: @sizes[i].Size_UK</p>
+                                            <p class="text-muted mb-0 fw-500">Style: @products[i].Product_style</p>
+                                            <p class="text-muted mb-0 fw-500">Color: @products[i].Product_color</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <!--Total order price-->
+                <div class="card card-lg mb-3 border w-80 mx-auto">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3 fw-semibold">Order Total</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item border-end-0 border-start-0 fw-500">
+                                <div class="row">
+                                    <span class="col-md-6">Subtotal</span>
+                                    <span class="col-md-6 text-end">$@finalPrice</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-end-0 border-start-0 fw-500">
+                                <div class="row">
+                                    <span class="col-md-6">Task</span>
+                                    <span class="col-md-6 text-end">$0.00</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-end-0 border-start-0 fw-500">
+                                <div class="row">
+                                    <span class="col-md-6">Shipping</span>
+                                    <span class="col-md-6 text-end">$0.00</span>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-end-0 border-start-0 fw-bolder border-bottom-0">
+                                <div class="row">
+                                    <span class="col-md-6">Total</span>
+                                    <span class="col-md-6 text-end">$@finalPrice</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+    </script>
+}

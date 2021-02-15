@@ -185,11 +185,13 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
 
         public int generateRandomId() {
             int randomValue;
-            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider()) {
+            Random random = new Random();
+            randomValue = random.Next(1000, 9999);
+            /*using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider()) {
                 byte [] val = new byte [6];
                 crypto.GetBytes(val);
                 randomValue = (int)BitConverter.ToUInt32(val, 0);
-            }
+            }*/
             return randomValue;
         }
 
@@ -203,6 +205,18 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
             } else {
                 return false;
             }
+        }
+
+        public void EditUser (int user_id, String name, String lastName, String nationality,
+            String phone, DateTime birthdate, String gender) {
+            Users user = this.GetUser(user_id);
+            user.Users_name = name;
+            user.Users_lastName = lastName;
+            user.User_nationality = nationality;
+            user.User_phone = phone;
+            user.User_birthDate = birthdate;
+            user.Users_gender = gender;
+            this.context.SaveChanges();
         }
 
         public Users GetUser (string email, string password) {
@@ -227,6 +241,10 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
 
         public List<Favorite> GetFavorites () {
             return this.context.Favorites.ToList();
+        }
+
+        public List<Favorite> GetFavorites(int userId) {
+            return this.context.Favorites.Where(x => x.Favorite_user == userId).ToList();
         }
 
         #endregion
@@ -301,10 +319,16 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
                 Where(x => x.Orders_user == user_id).ToList();
         }
 
+        public Orders GetOrdersById (int order_id) {
+            return this.context.Orders.
+                 Where(x => x.Orders_id == order_id).FirstOrDefault();
+        }
+
         public List<Order_details> GetOrder_Detail (int order_id) {
             return this.context.Order_details.
                 Where(x => x.Order_id == order_id).ToList();
         }
+
 
         #endregion
     }

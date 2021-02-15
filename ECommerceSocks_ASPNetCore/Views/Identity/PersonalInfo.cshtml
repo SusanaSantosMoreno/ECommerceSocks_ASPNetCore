@@ -1,0 +1,121 @@
+﻿@model Users
+<div class="container mt-5 pt-5 mb-5 f-raleway">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a>
+                </li>
+                <li class="breadcrumb-item" style="color:#6c757d">My Account</li>
+            </ol>
+        </nav>
+        <h2 class="mb-5 text-center">My Account</h2>
+    </div>
+    <div class="row" id="accountCategory">
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountOrdersLink" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="1">
+                        <div class="w-100 row">
+                            <span class="col-10">Orders</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountWishlistLink" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="2">
+                        <div class="w-100 row">
+                            <span class="col-10">WishList</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="userPersonalInfo" class="fw-bold pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="3">
+                        <div class="w-100 row">
+                            <span class="col-10">Personal Info</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="userAddresses" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="4">
+                        <div class="w-100 row">
+                            <span class="col-10">Addresses</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="logout" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="5">
+                        <div class="w-100 row">
+                            <span class="col-10">Logout</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8" id="accountCategoryViews">
+
+            <form class="w-75 mx-auto" method="post">
+                <div class="row mb-3">
+                    <div class="form-group col">
+                        <label>First Name*</label>
+                        <input type="text" class="form-control" name="firstName" placeholder="First Name *"
+                               value="@Model.Users_name">
+                    </div>
+                    <div class="form-group col">
+                        <label>Last Name*</label>
+                        <input type="text" class="form-control" name="lastName" placeholder="Last Name *"
+                               value="@Model.Users_lastName">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="form-group col">
+                        <label>Nationality </label>
+                        <input type="text" class="form-control" name="nationality" placeholder="Nationality"
+                               value="@Model.User_nationality">
+                    </div>
+                    <div class="form-group col">
+                        <label>Phone</label>
+                        <input type="tel" class="form-control" name="phone" placeholder="Phone"
+                               value="@Model.User_phone">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="form-group col">
+                        <label>Date of Birth</label>
+                        <input type="date" class="form-control" name="birthDate" 
+                               value="@Model.User_birthDate.ToString("yyyy-MM-dd")">
+                    </div>
+                    <div class="form-group col">
+                        <label>Gender</label><br/>
+                        <div class="btn-group w-100" role="group">
+                               @if (Model.Users_gender.Trim() == "M") {
+                                      <input type="radio" class="btn-check" name="gender" id="btnMale" value="M"
+                                             autocomplete="off" checked>
+                                      <label class="btn btn-outline-dark w-100" for="btnMale">Male</label>
+                                      <input type="radio" class="btn-check" name="gender" id="btnFemale"
+                                             value="F" autocomplete="off">
+                                      <label class="btn btn-outline-dark w-100" for="btnFemale">Female</label>
+                                } else {
+                                   <input type="radio" class="btn-check" name="gender" id="btnMale" value="M" autocomplete="off">
+                                      <label class="btn btn-outline-dark w-100" for="btnMale">Male</label>
+                                      <input type="radio" class="btn-check" name="gender" id="btnFemale" value="F" autocomplete="off" checked>
+                                      <label class="btn btn-outline-dark w-100" for="btnFemale">Female</label>
+                                }
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-black">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+

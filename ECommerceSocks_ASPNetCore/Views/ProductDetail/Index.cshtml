@@ -9,6 +9,9 @@
     <link href="~/lib/css/ProductDetails.css" rel="stylesheet" />
 </head>
 <div class="container mx-auto my-10">
+    <div class="alert alert-light alert-dismissible fade border border-dark text_center" 
+         role="alert" id="productAddAlert" style="display: none">
+    </div>
     <!--PRODUCT DETAILS-->
     <div class="row">
         <div id="ProductCarousel" class="carousel carousel-dark col mx-auto" data-bs-ride="carousel" data-interval="false">
@@ -18,7 +21,7 @@
                 }
             </ol>
             <div class="carousel-inner">
-                @for(int i=0; i<images.Count; i++) {
+                @for (int i = 0; i < images.Count; i++) {
                     <div class="@(i==0 ? "carousel-item active" : "carousel-item")">
                         <img src="~/@(images[i])" class="d-block w-75 mx-auto">
                     </div>
@@ -56,15 +59,19 @@
                         data-size_id="0">
                     SIZES
                 </button>
-                <ul class="dropdown-menu w-100" aria-labelledby="sizesBtn" >
+                <ul class="dropdown-menu w-100" aria-labelledby="sizesBtn">
                     @foreach (Product_sizes ps in productSizes) {
-                        <li><a class="dropdown-item product_size_item" href="#"
-                               data-size="@ps.Size_id">Size @ps.Size_UK</a></li>
+                        <li>
+                            <a class="dropdown-item product_size_item" href="#"
+                               data-size="@ps.Size_id">Size @ps.Size_UK</a>
+                        </li>
                     }
                 </ul>
             </div>
-            <button type="button" class="btn btn-outline-dark w-50 fw-bold" 
-                    data-product="@Model.Product_id" id="addToCartBtn" disabled>ADD TO CART</button>
+            <button type="button" class="btn btn-outline-dark w-50 fw-bold"
+                    data-product="@Model.Product_id" id="addToCartBtn" disabled>
+                ADD TO CART
+            </button>
             <h6 class="text-muted mt-3">Delivery in 24/72h</h6>
 
             <!--SECTIONS-->
@@ -154,7 +161,6 @@
                                                     </div>
                                                     <p class="text-muted m-0 fs-09 fw-semibold">@product.Subcategory_name · @product.Product_color</p>
                                                     <p class="m-0 fw-semibold">$@product.Product_price</p>
-                                                    <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -196,8 +202,10 @@
                     },
                     dataType: "text",
                     success: function (msg) {
-                        //console.log("reloading");
-                        //reloadEventCart();
+                        $("#productAddAlert").text("@(Model.Product_name) socks add to cart!");
+                        $("#productAddAlert").fadeTo(2000, 500).slideUp(500, function () {
+                            $("#productAddAlert").slideUp(500);
+                        });
                     },
                     error: function (req, status, error) {
                         console.log(error);

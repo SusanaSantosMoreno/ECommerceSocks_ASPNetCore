@@ -48,6 +48,9 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
 
         #region USERS
         public bool AddUser (String email, String name, String password, String repeatPassword);
+
+        public void EditUser (int user_id, String name, String lastName, String nationality,
+            String phone, DateTime birthdate, String gender);
         public Users GetUser (String email, String password);
 
         public Users GetUser (int user_id);
@@ -56,6 +59,8 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         #region FAVORITES
         public void AddFavorite (int product_id, int user_id);
         public List<Favorite> GetFavorites ();
+        public List<Favorite> GetFavorites (int userId);
+
         #endregion
 
         #region ADDRESSES
@@ -77,6 +82,7 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         public void AddOrderDetails (int order_id, int product_id, int size_id, int amount);
 
         public List<Orders> GetOrders (int user_id);
+        public Orders GetOrdersById (int order_id);
 
         public List<Order_details> GetOrder_Detail (int order_id);
 
