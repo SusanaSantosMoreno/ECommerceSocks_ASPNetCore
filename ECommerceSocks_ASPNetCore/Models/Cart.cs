@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 namespace ECommerceSocks_ASPNetCore.Models {
     public class Cart {
 
-        public Product_Complete Product { get; set; }
-        public Product_sizes Size { get; set; }
+        public int Product_id { get; set; }
+        public int Size_id { get; set; }
         public int Amount { get; set; }
 
-        public Cart (Product_Complete product, Product_sizes size, int amount) {
-            this.Product = product;
-            this.Size = size;
-            this.Amount = amount;
+        public Cart (int product_id, int size_id, int amount) {
+            Product_id = product_id;
+            Size_id = size_id;
+            Amount = amount;
         }
     }
 }

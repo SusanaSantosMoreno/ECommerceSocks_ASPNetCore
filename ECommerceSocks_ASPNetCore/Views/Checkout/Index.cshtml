@@ -1,0 +1,131 @@
+﻿@model Users
+@{ 
+    List<Cart_Complete> cart_Complete =  ViewData["cart"] as List<Cart_Complete>;
+    List<Addresses> addresses = ViewData["addresses"] as List<Addresses>;
+    float finalprice = 0;
+}
+<div class="container mt-5 pt-5 mb-5 f-raleway">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Cart" style="color:#6c757d">Shopping Cart</a>
+                </li>
+                <li class="breadcrumb-item" style="color:#6c757d">Checkout</li>
+            </ol>
+        </nav>
+        <h2 class="mb-5 text-center">Checkout</h2>
+    </div>
+
+    <div id="checkout">
+        <div class="row w-80 mx-auto">
+            <div class="col-12 col-md-7">
+                <h5>Address</h5>
+                <ul class="list-group mt-3 mb-4">
+                    @foreach (Addresses address in addresses) {
+                        <label class="list-group-item py-3 list-group-item-action border-end-0 border-start-0">
+                            <input class="form-check-input me-1" type="radio" name="address" 
+                                   value="@address.Addresses_id" checked>
+                            @address.Addresses_name - @(address.Addresses_street)(@(address.Addresses_city))
+                        </label>
+                    }
+                </ul>
+                <h5>Shipping Details</h5>
+                <div class="list-group mt-3 mb-4">
+                    <label class="list-group-item py-3 list-group-item-action">
+                        <input class="form-check-input me-1" type="radio" name="shipping" 
+                              value="8" checked>
+                        Standard Shipping (Delivery in 5 - 7 working days)
+                    </label>
+                    <label class="list-group-item py-3 list-group-item-action">
+                        <input class="form-check-input me-1" type="radio" name="shipping" value="12">
+                        Express Shipping (Delivery in 3 - 5 working days)
+                    </label>
+                    <label class="list-group-item py-3 list-group-item-action">
+                        <input class="form-check-input me-1" type="radio" name="shipping" value="18">
+                        1 - 2 Shipping (Delivery in 1 - 2 working days)
+                    </label>
+                    <label class="list-group-item py-3 list-group-item-action">
+                        <input class="form-check-input me-1" type="radio" name="shipping" value="0">
+                        Free Shipping (Living won't the He one every subdue meat replenish 
+                        face was you morning firmament darkness.) 
+                    </label>
+                </div>
+
+                <h5>Payment</h5>
+                <div class="list-group mt-3 mb-4">
+                    <label class="list-group-item py-3 list-group-item-action">
+                        <input class="form-check-input me-1" type="radio" name="payment" checked value="credit">
+                        Credit Card <i class='bx bx-credit-card-alt'></i>
+                    </label>
+                    <label class="list-group-item py-3 list-group-item-action">
+                        <input class="form-check-input me-1" type="radio" name="payment" value="paypal">
+                        PayPal
+                    </label>
+                </div>
+            </div>
+            <div class="col-12 col-md-5 col-lg-4 offset-lg-1">
+                <h5>Order Items (3)</h5>
+                <ul class="list-group mt-3">
+                    @foreach (Cart_Complete cart in cart_Complete) {
+                        <li class="list-group-item py-4 border-start-0 border-end-0">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="~/images/Products/Product_@(cart.Product.Product_id).jpg"
+                                         class="img-fluid mx-auto d-block w-100"
+                                         alt="img" />
+                                </div>
+                                <div class="col-8">
+                                    <p class="p-0 m-0"
+                                       style="font-weight: 600; font-size: 1.2rem">
+                                        <a asp-action="Index" asp-controller="ProductDetail"
+                                           asp-route-product_id="@cart.Product.Product_id">
+                                            @cart.Product.Product_name
+                                        </a>
+                                    </p>
+                                    <p class="p-0 m-0 text-muted"
+                                       style="font-weight: 600; font-size: .8rem">
+                                        @cart.Product.Subcategory_name · @cart.Product.Product_color
+                                    </p>
+                                    <p class="p-0 m-0 text-muted"
+                                       style="font-weight: 600; font-size: .8rem">Size @cart.Size.Size_UK</p>
+                                    <p class="p-0 m-0 text-muted"
+                                       style="font-weight: 600; font-size: .8rem">
+                                        @(cart.Amount) uds
+                                    </p>
+                                    <h5 class="text-muted mt-3"
+                                        style="font-weight: 600; font-size: 1.2rem">
+                                        $ @cart.Product.Product_price
+                                    </h5>
+                                </div>
+                            </div>
+                        </li>
+                        finalprice += (float)cart.Product.Product_price;
+                    }
+                </ul>
+                <div class="card text-dark bg-light mb-3 border border-0">
+                    <div class="card-body">
+                        <ul class="list-group list-group-sm list-group-flush ">
+                            <li class="list-group-item d-flex bg-transparent">
+                                <span>Subtotal</span>
+                                <span class="ms-auto font-size-sm">@finalprice</span>
+                            </li>
+                            <li class="list-group-item d-flex bg-transparent">
+                                <span class="fw-bold">Total</span>
+                                <span class="ms-auto fw-bold font-size-sm">@finalprice</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span style=" font-size: .8rem; ">Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</span>
+                <a class="btn btn-dark w-100 mt-3 mb-3" id="checkoutOrderBtn" asp-action="Index"
+                   asp-controller="Checkout" asp-route-done="1">Apply</a>
+                
+            </div>
+        </div>
+       </div>
+    </div>
+</div>

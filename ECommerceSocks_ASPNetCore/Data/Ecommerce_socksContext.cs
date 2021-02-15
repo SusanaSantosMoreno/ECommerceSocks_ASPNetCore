@@ -10,19 +10,19 @@ namespace ECommerceSocks_ASPNetCore.Data {
 
         public Ecommerce_socksContext(DbContextOptions options): base(options) { }
 
-        public DbSet<Addresses> addresses { get; set; }
-        public DbSet<Category> categories { get; set; }
-        public DbSet<Collections> collections { get; set; }
-        public DbSet<Discount> discounts { get; set; }
-        public DbSet<Favorite> favorites { get; set; }
-        public DbSet<Order_details> order_details { get; set; }
-        public DbSet<Orders> orders { get; set; }
-        public DbSet<Product> products { get; set; }
-        public DbSet<Product_size> product_sizes { get; set; }
-        public DbSet<Size> size { get; set; }
-        public DbSet<Subcategory> subcategories { get; set; }
-        public DbSet<Users> users { get; set; }
-        public DbSet<Product_sizes> product_sizes_view { get; set; }
-        public DbSet<Product_Complete> products_Complete { get; set; }
+        public DbSet<Addresses> Addresses { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Collections> Collections { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
+        public DbSet<Order_details> Order_details { get; set; }
+        public DbSet<Orders> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Product_size> Product_sizes { get; set; }
+        public DbSet<Size> Size { get; set; }
+        public DbSet<Subcategory> Subcategories { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Product_sizes> Product_sizes_view { get; set; }
+        public DbSet<Product_Complete> Products_Complete { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace ECommerceSocks_ASPNetCore.Helpers {
             return favorites;
         }
 
-        public List<int> removeFavoriteCache(int productId) {
+        public List<int> RemoveFavoriteCache(int productId) {
             List<int> favorites = new List<int>();
             if (this.memoryCache.Get("Favorites") != null) {
                 favorites = ToolkitService.DeserializeJsonObject<List<int>>
@@ -40,6 +40,68 @@ namespace ECommerceSocks_ASPNetCore.Helpers {
             favorites.RemoveAll(x => x == productId);
             this.memoryCache.Set("Favorites", ToolkitService.SerializeJsonObject(favorites));
             return favorites;
+        }
+
+        public void CleanFavoritesCache () {
+            this.memoryCache.Remove("Favorites");
+        }
+
+        public void SaveCartCache(int product_id, int size_id, int amount) {
+            List<Cart> cart = new List<Cart>();
+            if (this.memoryCache.Get("Cart") != null) {
+                cart = ToolkitService.DeserializeJsonObject<List<Cart>>
+                    (this.memoryCache.Get("Cart").ToString());
+            }
+            cart.Add(new Cart(product_id, size_id, amount));
+            this.memoryCache.Set("Cart", ToolkitService.SerializeJsonObject(cart));
+        }
+
+        public List<Cart> GetCartCache () {
+            List<Cart> cart = new List<Cart>();
+            if (this.memoryCache.Get("Cart") != null) {
+                cart = ToolkitService.DeserializeJsonObject<List<Cart>>
+                    (this.memoryCache.Get("Cart").ToString());
+            }
+            return cart;
+        }
+
+        public List<Cart> RemoveCartCache(int product_id, int size_id) {
+            List<Cart> cart = new List<Cart>();
+            if (this.memoryCache.Get("Cart") != null) {
+                cart = ToolkitService.DeserializeJsonObject<List<Cart>>
+                    (this.memoryCache.Get("Cart").ToString());
+            }
+            cart.RemoveAll(x => x.Product_id == product_id && x.Size_id == size_id);
+            this.memoryCache.Set("Cart", ToolkitService.SerializeJsonObject(cart));
+            return cart;
+        }
+
+        public List<Cart> EditCartCache(int product_id, int size_id) {
+            List<Cart> cart = this.GetCartCache();
+            foreach(Cart c in cart) {
+                if(c.Product_id == product_id && c.Size_id == size_id) {
+                    //si existe aumentamos su cantidad
+                    c.Amount = c.Amount + 1;
+                }
+            }
+            this.memoryCache.Set("Cart", ToolkitService.SerializeJsonObject(cart));
+            return cart;
+        }
+
+        public List<Cart> EditCartCache (int product_id, int size_id, int amount) {
+            List<Cart> cart = this.GetCartCache();
+            foreach (Cart c in cart) {
+                if (c.Product_id == product_id && c.Size_id == size_id) {
+                    //si existe aumentamos su cantidad
+                    c.Amount = amount;
+                }
+            }
+            this.memoryCache.Set("Cart", ToolkitService.SerializeJsonObject(cart));
+            return cart;
+        }
+
+        public void CleanCartCache () {
+            this.memoryCache.Remove("Cart");
         }
     }
 }

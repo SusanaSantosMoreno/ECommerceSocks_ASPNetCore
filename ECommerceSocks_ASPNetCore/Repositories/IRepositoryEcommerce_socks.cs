@@ -49,11 +49,37 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         #region USERS
         public bool AddUser (String email, String name, String password, String repeatPassword);
         public Users GetUser (String email, String password);
+
+        public Users GetUser (int user_id);
         #endregion
 
         #region FAVORITES
         public void AddFavorite (int product_id, int user_id);
         public List<Favorite> GetFavorites ();
+        #endregion
+
+        #region ADDRESSES
+        public List<Addresses> GetAddresses ();
+        public List<Addresses> GetAddresses (int user_id);
+        public Addresses GetAddress (int address_id);
+        public void AddAddress (int user_id, string name, string street,
+           string cp, string country, string province, string city);
+        public void EditAddress (int address_id,
+            string name, string street, string cp, string country,
+            string province, string city);
+        public void deleteAddress (int address_id);
+        #endregion
+
+        #region ORDERS
+
+        public Orders AddOrder (int user_id);
+
+        public void AddOrderDetails (int order_id, int product_id, int size_id, int amount);
+
+        public List<Orders> GetOrders (int user_id);
+
+        public List<Order_details> GetOrder_Detail (int order_id);
+
         #endregion
     }
 }

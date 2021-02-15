@@ -21,7 +21,7 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
         public IActionResult Index (int? disfav) {
             List<int> favorites = new List<int>();
             if(disfav != null) {
-                favorites = this.cachingService.removeFavoriteCache((int)disfav);
+                favorites = this.cachingService.RemoveFavoriteCache((int)disfav);
             } else {
                 favorites = this.cachingService.getFavoritesCache();
             }

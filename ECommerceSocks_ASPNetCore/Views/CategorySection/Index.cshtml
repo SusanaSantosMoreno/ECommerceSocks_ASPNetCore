@@ -122,15 +122,15 @@
                                         <div class="row m-0">
                                             <h5 class="col m-0 p-0 fw-semibold">@product.Product_name.ToUpper()</h5>
                                             <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
-                                            <a class="col-2" asp-action="Index" asp-controller="CategorySection" 
-                                               asp-route-favorite="@product.Product_id" 
+                                            <a class="col-2" asp-action="Index" asp-controller="CategorySection"
+                                               asp-route-favorite="@product.Product_id"
                                                asp-route-category_id="@product.Product_category">
                                                 <i class="bx bx-sm bx-heart m-0 p-0 text-end pointer fav_icon"></i>
-                                            </a>    
+                                            </a>
                                         </div>
                                         <p class="text-muted m-0 fs-09 fw-semibold">@product.Subcategory_name · @product.Product_color</p>
                                         <p class="m-0 fw-semibold">$@product.Product_price</p>
-                                        <button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>
+                                        <!--<button type="button" class="btn btn-dark m-0 w-100 mt-2">Add to bag</button>-->
                                     </div>
                                 </div>
                             </div>

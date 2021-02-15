@@ -40,20 +40,27 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
 
         [HttpPost]
         public IActionResult Index (int product_id, int size_id) {
-            //ADD PRODUCT TO SESSION CART
-            Product_Complete product = this.repository.GetProduct_Complete(product_id);
-            Product_sizes product_size = this.repository.GetProduct_Size_View(product_id, size_id);
-            Cart cart = new Cart(product, product_size, 1);
-            if (this.HttpContext.Session.GetString("SesionCart") != null) {
-                List<Cart> sessionCartItems = JsonConvert.DeserializeObject<List<Cart>>(this.HttpContext.Session.GetString("SesionCart"));
-                sessionCartItems.Add(cart);
-                this.HttpContext.Session.SetString("SesionCart", JsonConvert.SerializeObject(sessionCartItems));
+            //Add products to cart
+            List<Cart> cart = new List<Cart>();
+            cart = this.cachingService.GetCartCache();
+
+            if (cart.Count > 0) {//existen productos, comprobamos que el nuestro exista
+                foreach (Cart c in cart) {
+                    if (c.Product_id == product_id) {
+                        //si tenemos el mismo producto, comprobamos la talla
+                        if (c.Size_id != size_id) {//si es distinta, se añade al carrito
+                            this.cachingService.SaveCartCache(product_id, size_id, 1);
+                        } else {//si existe el mismo producto con la misma talla, aumentamos su cantidad
+                            this.cachingService.EditCartCache(product_id, size_id);
+                        }
+                    } else {
+                        this.cachingService.SaveCartCache(product_id, size_id, 1);
+                    }
+                }
             } else {
-                List<Cart> cart_items = new List<Cart>();
-                cart_items.Add(cart);
-                this.HttpContext.Session.SetString("SesionCart", JsonConvert.SerializeObject(cart_items));
+                this.cachingService.SaveCartCache(product_id, size_id, 1);
             }
-            return RedirectToAction("Index", new { product_id = product.Product_id });
+            return RedirectToAction("Index", new { product_id = product_id });
         }
     }
 }

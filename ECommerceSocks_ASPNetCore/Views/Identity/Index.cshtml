@@ -61,7 +61,6 @@
 
 @section scripts {
 <script type="text/javascript">
-    $(document).ready(function () {
         $("#accountCategoryViews").load("/Identity/GetOrdersPartial");
 
         $(".list-group-item a").click(function () {
@@ -83,6 +82,5 @@
                 $("#accountCategoryViews").load("/Identity/UserAddresses");
             }
         })
-    });
 </script>
 }

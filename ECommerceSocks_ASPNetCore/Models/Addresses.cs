@@ -15,7 +15,7 @@ namespace ECommerceSocks_ASPNetCore.Models {
         public int Addresses_id { get; set; }
 
         [Column("Addresses_user")]
-        public Users Addresses_user { get; set; }
+        public int Addresses_user { get; set; }
 
         [Column("Addresses_name")]
         public String Addresses_name { get; set; }
@@ -37,19 +37,17 @@ namespace ECommerceSocks_ASPNetCore.Models {
 
         public Addresses() { }
 
-        public Addresses( int addresses_id, Users addresses_user, 
-            string addresses_name, string addresses_street, 
-            string addresses_cp, string addresses_country, 
-            string addresses_province, string addresses_city ) {
-
-            this.Addresses_id = addresses_id;
-            this.Addresses_user = addresses_user;
-            this.Addresses_name = addresses_name;
-            this.Addresses_street = addresses_street;
-            this.Addresses_cp = addresses_cp;
-            this.Addresses_country = addresses_country;
-            this.Addresses_province = addresses_province;
-            this.Addresses_city = addresses_city;
+        public Addresses (int addresses_id, int addresses_user, 
+            string addresses_name, string addresses_street, string addresses_cp, 
+            string addresses_country, string addresses_province, string addresses_city) {
+            Addresses_id = addresses_id;
+            Addresses_user = addresses_user;
+            Addresses_name = addresses_name;
+            Addresses_street = addresses_street;
+            Addresses_cp = addresses_cp;
+            Addresses_country = addresses_country;
+            Addresses_province = addresses_province;
+            Addresses_city = addresses_city;
         }
     }
 }

@@ -16,12 +16,6 @@ namespace ECommerceSocks_ASPNetCore.Models {
         [Column("Size_id")]
         public int Size_id { get; set; }
 
-        [ForeignKey("Product_id")]
-        public Product Product { get; set; }
-        [ForeignKey("Size_id")]
-        public Size Size { get; set; }
-
-
         public Product_size() {}
 
         public Product_size( int product_id, int size_id ) {

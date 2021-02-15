@@ -38,10 +38,9 @@
             <div class="row">
                 <h3 class="col-5">@Model.Product_name</h3>
                 <div class="col mt-1">
-                    <a class="heart-icon p-0 text-start me-2 icon-hover fav_icon"
-                       asp-action="Index" asp-controller="ProductDetail" 
-                       asp-route-favorite="@Model.Product_id" asp-route-product_id="@Model.Product_id">
-                        <i class='bx bx-sm bx-heart'></i>
+                    <a class="heart-icon p-0 text-start me-2" id="product_fav"
+                       data-product="@Model.Product_id">
+                        <i class='bx bx-sm bx-heart pointer fav_icon icon-hover'></i>
                     </a>
                     <i class='bx bxs-share-alt bx-sm icon-hover'></i>
                 </div>
@@ -49,20 +48,23 @@
             </div>
             <h6 class="text-muted mt-2">@(Model.Subcategory_name) · @(Model.Product_color) </h6>
             <h3 class="mt-2">$ @Model.Product_price</h3>
+
             <div class="btn-group w-50 mb-3 mt-3" role="group">
-                <button id="buttonTallas" type="button"
+                <button id="sizesBtn" type="button"
                         class="btn btn-outline-dark dropdown-toggle fw-bold"
                         data-bs-toggle="dropdown" aria-expanded="false"
                         data-size_id="0">
                     SIZES
                 </button>
-                <ul class="dropdown-menu w-100" aria-labelledby="buttonTallas">
+                <ul class="dropdown-menu w-100" aria-labelledby="sizesBtn" >
                     @foreach (Product_sizes ps in productSizes) {
-                        <li><a class="dropdown-item product_size_item" href="#" data-size="@ps.Size_id">Size @ps.Size_UK</a></li>
+                        <li><a class="dropdown-item product_size_item" href="#"
+                               data-size="@ps.Size_id">Size @ps.Size_UK</a></li>
                     }
                 </ul>
             </div>
-            <button type="button" class="btn btn-outline-dark w-50 fw-bold" data-product="@Model.Product_id" id="addToCartBtn">ADD TO CART</button>
+            <button type="button" class="btn btn-outline-dark w-50 fw-bold" 
+                    data-product="@Model.Product_id" id="addToCartBtn" disabled>ADD TO CART</button>
             <h6 class="text-muted mt-3">Delivery in 24/72h</h6>
 
             <!--SECTIONS-->
@@ -180,24 +182,45 @@
 @section scripts {
     <script src="~/lib/js/ProductDetails.js"></script>
     <script type="text/javascript">
-    $("#addToCartBtn").click(function () {
-        var size = $("#buttonTallas").data("size_id");
-        var product = $(this).data("product");
-        $.ajax({
-            url: "@Url.Action("Index", "ProductDetail")",
-            type: "post",
-            data: {
-                product_id: product,
-                size_id: size
-            },
-            dataType: "text",
-            success: function (msg) {
-                console.log(msg);
-            },
-            error: function (req, status, error) {
-                console.log(msg);
-            }
-        })
-    });
+        $(document).ready(function () {
+            $("#addToCartBtn").click(function () {
+                console.log("product buy");
+                var size = $("#sizesBtn").data("size_id");
+                var product = $(this).data("product");
+                $.ajax({
+                    url: "@Url.Action("Index", "ProductDetail")",
+                    type: "post",
+                    data: {
+                        product_id: product,
+                        size_id: size
+                    },
+                    dataType: "text",
+                    success: function (msg) {
+                        //console.log("reloading");
+                        //reloadEventCart();
+                    },
+                    error: function (req, status, error) {
+                        console.log(error);
+                    }
+                })
+            });
+
+            $("#product_fav").click(function () {
+                console.log("fav click");
+                var product = $(this).data("product");
+                $.ajax({
+                    url: "@Url.Action("Index", "ProductDetail")",
+                    type: "get",
+                    data: {
+                        product_id: product,
+                        favorite: product
+                    },
+                    dataType: "text",
+                    error: function (req, status, error) {
+                        console.log(error);
+                    }
+                })
+            })
+        });
     </script>
 }

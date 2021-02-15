@@ -28,5 +28,9 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             ViewData ["Categories"] = categories;
             return View(lastProduct);
         }
+
+        public IActionResult ReloadCartEvent () {
+            return ViewComponent("Cart");
+        }
     }
 }
