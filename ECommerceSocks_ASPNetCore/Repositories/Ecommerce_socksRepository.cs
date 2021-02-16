@@ -242,10 +242,21 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
             return this.context.Users.
                 Where(x => x.Users_id == user_id).FirstOrDefault();
         }
-        #endregion
 
-        #region FAVORITES
-        public void AddFavorite (int product_id, int user_id) {
+        public Users GetUserByEmail (String user_email) {
+            return this.context.Users
+                .Where(x => x.Users_email == user_email).FirstOrDefault();
+        }
+
+        public void SetPassword (int user_id, String password) {
+            Users user = this.GetUser(user_id);
+            user.User_password = password;
+            this.context.SaveChanges();
+        }
+    #endregion
+
+    #region FAVORITES
+    public void AddFavorite (int product_id, int user_id) {
             int lastId = 0;
             if(this.context.Favorites.Count() > 0) {
                 lastId = this.context.Favorites.OrderByDescending(x => x.Favorite_id).FirstOrDefault().Favorite_id;

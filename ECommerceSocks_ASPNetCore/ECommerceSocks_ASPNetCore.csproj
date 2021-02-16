@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="wwwroot\templates\emailTemplates\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\lib\css\layout.css" />

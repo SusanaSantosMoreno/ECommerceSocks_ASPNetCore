@@ -12,10 +12,15 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
 
         private IRepositoryEcommerce_socks repository;
         private CachingService cachingService;
+        private PathProvider pathProvider;
+        private MailService mailService;
 
-        public HomeController(IRepositoryEcommerce_socks repo, CachingService caching ) {
+        public HomeController(IRepositoryEcommerce_socks repo, CachingService caching,
+            PathProvider provider, MailService mail) {
             this.repository = repo;
             this.cachingService = caching;
+            this.pathProvider = provider;
+            this.mailService = mail;
         }
 
         // GET HOME
@@ -31,7 +36,10 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
 
         [HttpPost]
         public IActionResult Index (String email) {
-            //enviar email
+            String template = 
+                this.pathProvider.MapPath("NewsLetter_EmailTemplate.html", "templates\\emailTemplates");
+            String text = System.IO.File.ReadAllText(template);
+            this.mailService.SendMail(email, "Welcome to our Newsletter!", text);
             return RedirectToAction("Index");
         }
     }

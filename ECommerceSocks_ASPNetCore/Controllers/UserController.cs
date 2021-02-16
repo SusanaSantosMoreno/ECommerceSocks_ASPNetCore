@@ -15,11 +15,16 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
     public class UserController : Controller {
 
         IRepositoryEcommerce_socks repository;
-        CachingService cachingService;
+        CachingService cachingService; 
+        private PathProvider pathProvider;
+        private MailService mailService;
 
-        public UserController(IRepositoryEcommerce_socks repo, CachingService service) { 
+        public UserController(IRepositoryEcommerce_socks repo, CachingService service
+            , PathProvider provider, MailService mail) { 
             this.repository = repo;
             this.cachingService = service;
+            this.pathProvider = provider;
+            this.mailService = mail;
         }
 
         public IActionResult Login () {
@@ -47,7 +52,7 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
 
                 //add favorites to database
                 this.cachingService.CleanFavoritesCache();
-                List<Favorite> favorites = this.repository.GetFavorites();
+                List<Favorite> favorites = this.repository.GetFavorites(user.Users_id);
                 foreach(Favorite fav in favorites) {
                     this.cachingService.saveFavoritesCache(fav.Favorite_product);
                 }
@@ -68,12 +73,37 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
         public IActionResult SignUp (String email, String name,  String password, String repeatPassword, bool serviceTerms) {
             bool result = this.repository.AddUser(email, name, password, repeatPassword);
             if (result) {
+                String template =
+                this.pathProvider.MapPath("Welcome_EmailTemplate.html", "templates\\emailTemplates");
+                String text = System.IO.File.ReadAllText(template);
+                this.mailService.SendMail(email, "Welcome to our family!", text);
                 return RedirectToAction("Login");
             }
             return View("Index", "Home");
         }
 
-        public IActionResult ForgotPassword () {
+        public IActionResult ForgotPassword (String email) {
+            Users user = this.repository.GetUserByEmail(email);
+            if(user != null) {
+                var token = ToolkitService.GenerarToken();
+                var link = Url.Action("ResetPassword", "User", new { token, email = email }, Request.Scheme);
+                this.mailService.SendMail(email, link);
+            }
+            return View();
+        }
+
+        public IActionResult ResetPassword(string token, string email) {
+            Users user = this.repository.GetUserByEmail(email);
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword (String email, String password, String repeatPassword) {
+            if (password.Equals(repeatPassword)) {
+                Users user = this.repository.GetUserByEmail(email);
+                this.repository.SetPassword(user.Users_id, password);
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
     }

@@ -38,6 +38,11 @@ namespace ECommerceSocks_ASPNetCore.Helpers {
             return JsonConvert.DeserializeObject<T>(jsonObj);
         }
 
+        public static string GenerarToken () {
+            Random rnd = new Random();
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+            return new string(Enumerable.Repeat(chars, 16).Select(s => s[rnd.Next(s.Length)]).ToArray());
+        }
     }
 }

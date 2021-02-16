@@ -54,6 +54,10 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         public Users GetUser (String email, String password);
 
         public Users GetUser (int user_id);
+
+        public Users GetUserByEmail (String user_email);
+
+        public void SetPassword (int user_id, String password);
         #endregion
 
         #region FAVORITES

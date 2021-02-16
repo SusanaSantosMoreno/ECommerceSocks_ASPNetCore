@@ -31,6 +31,7 @@ namespace ECommerceSocks_ASPNetCore {
             services.AddSingleton<PathProvider>();
             services.AddSingleton<CachingService>();
 
+
             /*TEMPDATA*/
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 

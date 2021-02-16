@@ -49,5 +49,11 @@ namespace ECommerceSocks_ASPNetCore.Helpers {
             mail.Attachments.Add(attachment);
             this.ConfigureSmtp(mail);
         }
+
+        public void SendMail (String receiver, String link) {
+            String message = "Su enlace es: <a href=" + link + ">" + link + "</a>";
+            MailMessage mail = this.ConfigureMail(receiver, "Password Recovery", message);
+            this.ConfigureSmtp(mail);
+        }
     }
 }
