@@ -47,6 +47,7 @@ namespace ECommerceSocks_ASPNetCore {
             services.AddResponseCaching();
 
             /*SESSION*/
+            services.AddHttpContextAccessor();
             services.AddDistributedMemoryCache();
             services.AddSession();
 

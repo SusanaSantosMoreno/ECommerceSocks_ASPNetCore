@@ -22,8 +22,13 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             this.cachingService = caching;
         }
 
-        public IActionResult Index(int category_id, int? subcategory_id, int? favorite) {
-            List<Product_Complete> products = repository.GetProduct_CompletesByCategory(category_id);
+        public IActionResult Index(int category_id, int? subcategory_id, int? favorite,
+            String? stylesFilter, String? printsFilter, String? colorsFilter) {
+
+            List<Product_Complete> products = 
+                repository.FilterProduct_Completes(category_id, subcategory_id, 
+                stylesFilter, printsFilter, colorsFilter);
+
             Category category = this.repository.GetCategory(category_id);
             ViewData["Category"] = category;
             List<Subcategory> subcategories = repository.GetSubcategories();
@@ -49,8 +54,8 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Index(int category_id, int subcategory_id, List<String> stylesFilter, 
-            List<String> printsFilter, List<String> colorsFilter) {
+        public IActionResult Index(int category_id, int subcategory_id, String? stylesFilter, 
+            String? printsFilter, String? colorsFilter) {
 
             List<Product_Complete> products = repository.FilterProduct_Completes(category_id, subcategory_id, 
                 stylesFilter, printsFilter, colorsFilter);

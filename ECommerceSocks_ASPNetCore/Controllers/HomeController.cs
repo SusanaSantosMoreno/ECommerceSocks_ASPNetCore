@@ -29,8 +29,10 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             return View(lastProduct);
         }
 
-        public IActionResult ReloadCartEvent () {
-            return ViewComponent("Cart");
+        [HttpPost]
+        public IActionResult Index (String email) {
+            //enviar email
+            return RedirectToAction("Index");
         }
     }
 }

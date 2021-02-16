@@ -9,7 +9,7 @@
     <link href="~/lib/css/ProductDetails.css" rel="stylesheet" />
 </head>
 <div class="container mx-auto my-10">
-    <div class="alert alert-light alert-dismissible fade border border-dark text_center" 
+    <div class="alert alert-light alert-dismissible fade border border-dark" 
          role="alert" id="productAddAlert" style="display: none">
     </div>
     <!--PRODUCT DETAILS-->
@@ -203,8 +203,9 @@
                     dataType: "text",
                     success: function (msg) {
                         $("#productAddAlert").text("@(Model.Product_name) socks add to cart!");
-                        $("#productAddAlert").fadeTo(2000, 500).slideUp(500, function () {
+                        $("#productAddAlert").fadeTo(1000, 500).slideUp(500, function () {
                             $("#productAddAlert").slideUp(500);
+                            location.reload();
                         });
                     },
                     error: function (req, status, error) {

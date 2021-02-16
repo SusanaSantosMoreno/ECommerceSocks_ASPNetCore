@@ -149,3 +149,30 @@ a {
 .w-10{
     width: 10%;
 }
+
+[data-fav] {
+    position: relative;
+    display: inline-block;
+}
+
+[data-fav]::before {
+    content: attr(data-fav);
+    position: absolute;
+    top: -.5rem;
+    right: -.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 19px;
+    height: 19px;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    background-color: #ff6f61;
+    color: #fff;
+}
+
+.bg-grey {
+    background-color: #f7f7f7;
+}

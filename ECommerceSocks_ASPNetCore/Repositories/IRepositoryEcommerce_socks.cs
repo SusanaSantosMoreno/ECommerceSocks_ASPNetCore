@@ -20,8 +20,8 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         public List<Product_Complete> GetProduct_Completes ();
         public Product_Complete GetProduct_Complete (int product_id);
         public List<Product_Complete> GetFirstProduct_Complete (int amount);
-        public List<Product_Complete> FilterProduct_Completes (int category_id, int subcategory_id,
-            List<String> stylesFilter, List<String> printsFilter, List<String> colorsFilter);
+        public List<Product_Complete> FilterProduct_Completes (int category_id, int? subcategory_id,
+            String? stylesFilter, String? printsFilter, String? colorsFilter);
         #endregion
 
         #region CATEGORIES
@@ -60,6 +60,8 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         public void AddFavorite (int product_id, int user_id);
         public List<Favorite> GetFavorites ();
         public List<Favorite> GetFavorites (int userId);
+
+        public void RemoveUserFavorites (int userId);
 
         #endregion
 

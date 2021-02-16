@@ -2,7 +2,8 @@
 <div class="row">
     @foreach (Product_Complete fav in Model) {
         <div class="card border border-white col-4 mb-3">
-            <a asp-action="Index" asp-controller="Favorites" asp-route-disfav="@fav.Product_id"
+            <a asp-action="Index" asp-controller="Identity"
+               asp-route-clicked="2" asp-route-disfav="@fav.Product_id"
                class="btn btn-xs btn-circle btn-white-primary card-action ms-auto">
                 <i class='bx bx-x bx-sm'></i>
             </a>
@@ -27,85 +28,4 @@
             </div>
         </div>
     }
-    <!--
-    <div class="card border border-white col-4 mb-3">
-        <button class="btn btn-xs btn-circle btn-white-primary card-action ms-auto">
-            <i class='bx bx-x bx-sm'></i>
-        </button>
-        <div class="card-body">
-            <div class="img-hover-zoom">
-                <a asp-controller="ProductDetail" asp-action="Index" asp-route-product_id="1">
-                    <img src="~/images/Products/Product_13.jpg" class="img-fluid mx-auto d-block w-75" alt="img">
-                </a>
-            </div>
-            <div id="product_content" class="mt-4 f-raleway">
-                <div class="row m-0">
-                    <h5 class="col m-0 p-0 fw-semibold">PRODUCT NAME</h5>
-                    <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
-                </div>
-                <p class="text-muted m-0 fs-09 fw-semibold">Mid Calf · Black</p>
-                <p class="m-0 fw-semibold">$12.00</p>
-            </div>
-        </div>
-    </div>
-    <div class="card border border-white col-4 mb-3">
-        <button class="btn btn-xs btn-circle btn-white-primary card-action ms-auto">
-            <i class='bx bx-x bx-sm'></i>
-        </button>
-        <div class="card-body">
-            <div class="img-hover-zoom">
-                <a asp-controller="ProductDetail" asp-action="Index" asp-route-product_id="1">
-                    <img src="~/images/Products/Product_28.jpg" class="img-fluid mx-auto d-block w-75" alt="img">
-                </a>
-            </div>
-            <div id="product_content" class="mt-4 f-raleway">
-                <div class="row m-0">
-                    <h5 class="col m-0 p-0 fw-semibold">PRODUCT NAME</h5>
-                    <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
-                </div>
-                <p class="text-muted m-0 fs-09 fw-semibold">Mid Calf · Black</p>
-                <p class="m-0 fw-semibold">$12.00</p>
-            </div>
-        </div>
-    </div>
-    <div class="card border border-white col-4 mb-3">
-        <button class="btn btn-xs btn-circle btn-white-primary card-action ms-auto">
-            <i class='bx bx-x bx-sm'></i>
-        </button>
-        <div class="card-body">
-            <div class="img-hover-zoom">
-                <a asp-controller="ProductDetail" asp-action="Index" asp-route-product_id="1">
-                    <img src="~/images/Products/Product_14.jpg" class="img-fluid mx-auto d-block w-75" alt="img">
-                </a>
-            </div>
-            <div id="product_content" class="mt-4 f-raleway">
-                <div class="row m-0">
-                    <h5 class="col m-0 p-0 fw-semibold">PRODUCT NAME</h5>
-                    <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
-                </div>
-                <p class="text-muted m-0 fs-09 fw-semibold">Mid Calf · Black</p>
-                <p class="m-0 fw-semibold">$12.00</p>
-            </div>
-        </div>
-    </div>
-    <div class="card border border-white col-4 mb-3">
-        <button class="btn btn-xs btn-circle btn-white-primary card-action ms-auto">
-            <i class='bx bx-x bx-sm'></i>
-        </button>
-        <div class="card-body">
-            <div class="img-hover-zoom">
-                <a asp-controller="ProductDetail" asp-action="Index" asp-route-product_id="1">
-                    <img src="~/images/Products/Product_21.jpg" class="img-fluid mx-auto d-block w-75" alt="img">
-                </a>
-            </div>
-            <div id="product_content" class="mt-4 f-raleway">
-                <div class="row m-0">
-                    <h5 class="col m-0 p-0 fw-semibold">PRODUCT NAME</h5>
-                    <i class="bx bx-share-alt bx-sm col-2 m-0 p-0 text-end pointer"></i>
-                </div>
-                <p class="text-muted m-0 fs-09 fw-semibold">Mid Calf · Black</p>
-                <p class="m-0 fw-semibold">$12.00</p>
-            </div>
-        </div>
-    </div>-->
 </div>

@@ -46,15 +46,16 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
                 String controller = TempData["controller"].ToString();
 
                 //add favorites to database
-                /*this.cachingService.CleanFavoritesCache();
+                this.cachingService.CleanFavoritesCache();
                 List<Favorite> favorites = this.repository.GetFavorites();
                 foreach(Favorite fav in favorites) {
                     this.cachingService.saveFavoritesCache(fav.Favorite_product);
-                }*/
+                }
 
                 return RedirectToAction(action, controller);
             }
             else{
+                ViewData["Invalid"] = "invalid";
                 return View();
             }
         }

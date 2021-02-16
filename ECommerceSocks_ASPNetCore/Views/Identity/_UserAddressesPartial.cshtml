@@ -10,12 +10,16 @@
                         </h5>
                         <div class="col-3">
                             <div class="row">
-                                <button class="btn btn-xs btn-circle btn-white-secondary ms-auto col-3">
+                                <a class="btn btn-xs btn-circle btn-white-secondary ms-auto col-3"
+                                   asp-action="EditAddresses" asp-controller="Identity" 
+                                   asp-route-address_id="@address.Addresses_id">
                                     <i class="bx bxs-pencil"></i>
-                                </button>
-                                <button class="btn btn-xs btn-circle btn-white-primary ms-auto col-3">
+                                </a>
+                                <a class="btn btn-xs btn-circle btn-white-primary ms-auto col-3"
+                                   asp-action="Index" asp-controller="Identity"
+                                   asp-route-clicked="4" asp-route-address_deleted="@address.Addresses_id">
                                     <i class="bx bx-x bx-sm"></i>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -30,7 +34,8 @@
         </div>
     }
 </div>
-<a class="btn btn-outline-dark w-100 mt-3 border border-secondary" id="addAddress">
+<a class="btn btn-outline-dark w-100 mt-3 border border-secondary" id="addAddress"
+   asp-action="EditAddresses" asp-controller="Identity" >
     Add Address
     <i class='bx bx-plus'></i>
 </a>

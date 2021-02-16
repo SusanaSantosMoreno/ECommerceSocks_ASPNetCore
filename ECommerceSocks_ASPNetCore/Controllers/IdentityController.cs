@@ -25,8 +25,14 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             this.cachingService = service;
         }
 
-        public IActionResult Index (int? clicked) {
+        public IActionResult Index (int? clicked, int? address_deleted, int? disfav) {
             ViewData["Clicked"] = clicked == null ? "1" : clicked.ToString();
+            if(address_deleted != null) {
+                this.repository.deleteAddress((int)address_deleted);
+            }
+            if(disfav != null) {
+                this.cachingService.RemoveFavoriteCache((int)disfav);
+            }
             return View();
         }
 
@@ -72,11 +78,10 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
         }
 
         public IActionResult GetWishlistPartial () {
-            List<Favorite> favorites = this.repository.
-                GetFavorites(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString()));
+            List<int> favorites = this.cachingService.getFavoritesCache();
             List<Product_Complete> productsFavorites = new List<Product_Complete>();
-            foreach(Favorite fav in favorites) {
-                productsFavorites.Add(this.repository.GetProduct_Complete(fav.Favorite_product));
+            foreach (int fav in favorites) {
+                productsFavorites.Add(this.repository.GetProduct_Complete(fav));
             }
             return PartialView("_OrderWishlistPartial", productsFavorites);
         }
@@ -86,11 +91,12 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             if (logout == null) {
                 return PartialView("_UserLogoutPartial");
             } else {
-                /*List<int> favorites = this.cachingService.getFavoritesCache();
+                List<int> favorites = this.cachingService.getFavoritesCache();
+                this.repository.RemoveUserFavorites(userId);
                 foreach (int fav in favorites) {
                     this.repository.AddFavorite(fav, userId);
                 }
-                this.cachingService.CleanFavoritesCache();*/
+                this.cachingService.CleanFavoritesCache();
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 return RedirectToAction("Index", "Home");
             }
@@ -104,6 +110,29 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             int user_id = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString());
             List<Addresses> addreses = this.repository.GetAddresses(user_id);
             return PartialView("_UserAddressesPartial", addreses);
+        }
+
+        public IActionResult EditAddresses (int? address_id) {
+            if(address_id != null) {
+                Addresses address = this.repository.GetAddress((int)address_id);
+                return View(address);
+            } else {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult EditAddresses (int? address_id, String name, String street, String cp, 
+                String country, String city, String province) {
+            int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString());
+            if(address_id != null) {
+                this.repository.EditAddress((int)address_id, name, street, cp, country, province, city);
+            } else {
+                this.repository.AddAddress(userId, name, street, cp, country, province, city);
+                List<Addresses> addreses = this.repository.GetAddresses(userId);
+            }
+
+            return RedirectToAction("Index", new { clicked = 4 });
         }
     }
 }

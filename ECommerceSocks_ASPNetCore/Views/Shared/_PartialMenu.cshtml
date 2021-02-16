@@ -1,7 +1,17 @@
-﻿<div class="me-5 row nav-icons">
+﻿@{
+    var favs = Context.Session.GetInt32("favs") == null ? 0 : Context.Session.GetInt32("favs");
+    var cartItems = Context.Session.GetInt32("cartItems") == null ? 0 : Context.Session.GetInt32("cartItems");
+}
+<div class="me-5 row nav-icons">
     <!--<i class='bx bx-search bx-sm text-end col nav-icon m-auto'></i>-->
     <a class="col nav-icon m-auto text-center mt-2" asp-action="Index" asp-controller="Favorites">
-        <i class='bx bx-heart bx-sm'></i>
+        @if (favs > 0) {
+            <span data-fav="@favs">
+                <i class='bx bx-heart bx-sm'></i>
+            </span>
+        } else {
+            <i class='bx bx-heart bx-sm'></i>
+        }
     </a>
     @if (Context.User.Identity.IsAuthenticated) {
         <a class="user-icon mx-2" style="margin-top: 7px; color:white !important;"
@@ -14,6 +24,13 @@
         </a>
     }
     <a class="col nav-icon m-auto text-center mt-2" asp-action="Index" asp-controller="Cart">
-        <i class='bx bx-shopping-bag bx-sm'></i>
+        @if (cartItems > 0) {
+            <span data-fav="@cartItems">
+                <i class='bx bx-shopping-bag bx-sm'></i>
+            </span>
+        } else {
+            <i class='bx bx-shopping-bag bx-sm'></i>
+        }
+
     </a>
 </div>

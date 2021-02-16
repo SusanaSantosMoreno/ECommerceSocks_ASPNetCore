@@ -20,8 +20,15 @@
                         <input type="password" class="form-control" id="inputPassword" name="password"
                                placeholder="Password *">
                     </div>
-                    <a class="text-dark" asp-action="ForgotPassword" asp-controller="User" 
-                       id="forgotPasswordLink">Forgot your password?</a>
+                    <div class="row">
+                        <a class="text-dark col-md-16 col-sm-6" asp-action="ForgotPassword" asp-controller="User"
+                           id="forgotPasswordLink">Forgot your password?</a>
+                        @if (ViewData["Invalid"] != null) {
+                            <p class="text-danger col-md-16 col-sm-6 text-end mb-0">User or Password invalid</p>
+                        }
+                    </div>
+                    
+
                     <button type="submit" class="btn btn-outline-dark w-100 mb-3 mt-3">LOGIN</button>
                     <div class="w-100 text-center">
                         <a class="text-dark" asp-action="SignUp" asp-controller="User" id="signUpLink">New customer? Sign up </a>

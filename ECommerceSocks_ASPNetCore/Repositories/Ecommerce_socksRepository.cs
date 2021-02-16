@@ -91,13 +91,24 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
             return lastProducts;
         }
 
-        public List<Product_Complete> FilterProduct_Completes (int category_id, int subcategory_id,
-            List<String> stylesFilter, List<String> printsFilter, List<String> colorsFilter) {
-            var consulta = from datos in this.context.Products_Complete
-                           where datos.Product_subcategory == subcategory_id && 
-                                 stylesFilter.Contains(datos.Product_style)
-                           select datos;
-            return consulta.ToList();
+        public List<Product_Complete> FilterProduct_Completes (int category_id, int? subcategory_id,
+            String? stylesFilter, String? printsFilter, String? colorsFilter) {
+            if(subcategory_id != null) {
+                return this.context.Products_Complete.Where(x => x.Product_category == category_id &&
+                    x.Product_subcategory == subcategory_id).ToList();
+            }else if(stylesFilter != null) {
+                return this.context.Products_Complete.Where(x => x.Product_category == category_id &&
+                    x.Product_style == stylesFilter).ToList();
+            }else if(printsFilter != null) {
+                return this.context.Products_Complete.Where(x => x.Product_category == category_id &&
+                    x.Product_print == printsFilter).ToList();
+            } else if (colorsFilter != null) {
+                return this.context.Products_Complete.Where(x => x.Product_category == category_id &&
+                    x.Product_color == colorsFilter).ToList();
+            }else{
+                return this.context.Products_Complete
+                    .Where(x => x.Product_category == category_id).ToList();
+            }
         }
 
         #endregion
@@ -199,6 +210,8 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
         public bool AddUser (string email, string name, string password, string repeatPassword) {
             if (password == repeatPassword) {
                 Users user = new Users(name, email, password);
+                user.Users_id = this.generateRandomId();
+                user.Users_gender = "M";
                 this.context.Users.Add(user);
                 this.context.SaveChanges();
                 return true;
@@ -233,7 +246,10 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
 
         #region FAVORITES
         public void AddFavorite (int product_id, int user_id) {
-            int lastId = this.context.Favorites.OrderByDescending(x => x.Favorite_id).FirstOrDefault().Favorite_id;
+            int lastId = 0;
+            if(this.context.Favorites.Count() > 0) {
+                lastId = this.context.Favorites.OrderByDescending(x => x.Favorite_id).FirstOrDefault().Favorite_id;
+            }
             Favorite fav = new Favorite((lastId + 1), product_id, user_id);
             this.context.Favorites.Add(fav);
             this.context.SaveChanges();
@@ -245,6 +261,12 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
 
         public List<Favorite> GetFavorites(int userId) {
             return this.context.Favorites.Where(x => x.Favorite_user == userId).ToList();
+        }
+
+        public void RemoveUserFavorites(int userId) {
+            List<Favorite> favorites = this.GetFavorites(userId);
+            this.context.Favorites.RemoveRange(favorites);
+            this.context.SaveChanges();
         }
 
         #endregion

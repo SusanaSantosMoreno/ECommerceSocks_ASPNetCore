@@ -1,0 +1,150 @@
+﻿@model Addresses
+<div class="container mt-5 pt-5 mb-5 f-raleway">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Home" style="color:#6c757d">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Identity" asp-route-clicked="4" 
+                       style="color:#6c757d">Addresses</a>
+                </li>
+                <li class="breadcrumb-item" style="color:#6c757d">Address Detail</li>
+            </ol>
+        </nav>
+        <h2 class="mb-5 text-center">My Account</h2>
+    </div>
+    <div class="row" id="accountCategory">
+        <div class="col-md-4">
+            <ul class="list-group">
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountOrdersLink" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="1">
+                        <div class="w-100 row">
+                            <span class="col-10">Orders</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="AccountWishlistLink" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="2">
+                        <div class="w-100 row">
+                            <span class="col-10">WishList</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="userPersonalInfo" class="text-muted pointer"
+                       asp-action="PersonalInfo" asp-controller="Identity">
+                        <div class="w-100 row">
+                            <span class="col-10">Personal Info</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="userAddresses" class="fw-bold pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="4">
+                        <div class="w-100 row">
+                            <span class="col-10">Addresses</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item border-start-0 border-end-0">
+                    <a id="logout" class="text-muted pointer"
+                       asp-action="Index" asp-controller="Identity" asp-route-clicked="5">
+                        <div class="w-100 row">
+                            <span class="col-10">Logout</span>
+                            <i class='bx bx-chevron-right bx-sm col-2 text-end'></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8" id="editAddresses">
+            @if (Model != null) {
+                <form class="w-75 mx-auto" method="post">
+                    <input type="hidden" value="@Model.Addresses_id" name="address_id" />
+                    <div class="form-group col mb-3">
+                        <label>Address Name*</label>
+                        <input type="text" class="form-control" name="name" placeholder="Address Name *"
+                               value="@Model.Addresses_name">
+                    </div>
+                    <div class="form-group col mb-3">
+                        <label>Address Line * </label>
+                        <input type="text" class="form-control" name="street" placeholder="Address Line *"
+                               value="@Model.Addresses_street">
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col">
+                            <label>Postal Code * </label>
+                            <input type="text" class="form-control" name="cp" placeholder="Postal Code *"
+                                   value="@Model.Addresses_cp">
+                        </div>
+                        <div class="form-group col">
+                            <label>City * </label>
+                            <input type="tel" class="form-control" name="city" placeholder="City *"
+                                   value="@Model.Addresses_city">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col">
+                            <label>Province Code * </label>
+                            <input type="text" class="form-control" name="province" placeholder="Province Code *"
+                                   value="@Model.Addresses_province">
+                        </div>
+                        <div class="form-group col">
+                            <label>Country * </label>
+                            <input type="tel" class="form-control" name="country" placeholder="Country *"
+                                   value="@Model.Addresses_country">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-black">Save Changes</button>
+                </form>
+            } else {
+                <form class="w-75 mx-auto" method="post">
+                    <div class="form-group col mb-3">
+                        <label>Address Name*</label>
+                        <input type="text" class="form-control" name="name" placeholder="Address Name *"
+                               >
+                    </div>
+                    <div class="form-group col mb-3">
+                        <label>Address Line * </label>
+                        <input type="text" class="form-control" name="street" placeholder="Address Line *"
+                               >
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col">
+                            <label>Postal Code * </label>
+                            <input type="text" class="form-control" name="cp" placeholder="Postal Code *"
+                                   >
+                        </div>
+                        <div class="form-group col">
+                            <label>City * </label>
+                            <input type="tel" class="form-control" name="city" placeholder="City *"
+                                  >
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col">
+                            <label>Province Code * </label>
+                            <input type="text" class="form-control" name="province" placeholder="Province Code *"
+                                   >
+                        </div>
+                        <div class="form-group col">
+                            <label>Country * </label>
+                            <input type="tel" class="form-control" name="country" placeholder="Country *"
+                                   >
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-outline-black">Save Changes</button>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
