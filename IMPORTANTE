@@ -1,0 +1,6 @@
+Aunque hay encriptación, el usuario existente es:
+ Usuario: admin
+ Contraseña: 1234
+Se pueden crear usuarios, no tiene roles. 
+Prueba con un email existente, manda correo de bienvenida y el de newsletter.
+La contraseña tambien se recupera mediante un enlace enviado al correo. 
