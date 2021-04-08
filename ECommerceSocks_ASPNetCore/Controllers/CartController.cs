@@ -1,6 +1,7 @@
 ﻿using ECommerceSocks_ASPNetCore.Helpers;
-using ECommerceSocks_ASPNetCore.Models;
 using ECommerceSocks_ASPNetCore.Repositories;
+using ECommerceSocks_ASPNetCore.Services;
+using EcommerceSocksAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,15 @@ using System.Threading.Tasks;
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class CartController : Controller {
 
-        IRepositoryEcommerce_socks repository;
+        Ecommerce_socksService service;
         CachingService cachingService;
 
-        public CartController (IRepositoryEcommerce_socks repo, CachingService caching) {
-            this.repository = repo;
+        public CartController (Ecommerce_socksService service, CachingService caching) {
+            this.service = service;
             this.cachingService = caching;
         }
 
-        public IActionResult Index (int? product_removed, int? size_removed) {
+        public async Task<IActionResult> Index (int? product_removed, int? size_removed) {
             if(product_removed != null && size_removed != null) {
                 this.cachingService.RemoveCartCache((int)product_removed, (int)size_removed);
             }
@@ -26,8 +27,8 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             cart = this.cachingService.GetCartCache();
             List<Cart_Complete> cartComplete = new List<Cart_Complete>();
             foreach (Cart c in cart) {
-                cartComplete.Add(new Cart_Complete(this.repository.GetProduct_Complete(c.Product_id),
-                    this.repository.GetProduct_Size_View(c.Product_id, c.Size_id), c.Amount));
+                Product_sizes size = await this.service.GetProduct_SizesByProductSizeAsync(c.Product_id, c.Size_id);
+                cartComplete.Add(new Cart_Complete(await this.service.GetProductCompleteAsync(c.Product_id), size, c.Amount));
             }
             return View(cartComplete);
         }

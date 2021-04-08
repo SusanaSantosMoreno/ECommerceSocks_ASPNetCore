@@ -29,7 +29,7 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             if(favorite != null) {
                 this.cachingService.saveFavoritesCache((int)favorite);
             }
-            List<Product_Complete> lastProduct = await this.service.getfirstproductcom(12);
+            List<Product_Complete> lastProduct = await this.service.GetFirstProduct_CompleteAsync(12);
             List<Category> categories = await this.service.GetCategoriesAsync();
             ViewData ["Categories"] = categories;
             return View(lastProduct);

@@ -1,5 +1,5 @@
 ﻿using ECommerceSocks_ASPNetCore.Helpers;
-using ECommerceSocks_ASPNetCore.Models;
+using EcommerceSocksAPI.Models;
 using ECommerceSocks_ASPNetCore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,30 +8,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ECommerceSocks_ASPNetCore.Services;
 
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class ProductDetailController : Controller {
 
-        private IRepositoryEcommerce_socks repository;
+        private Ecommerce_socksService service;
         private PathProvider provider;
         private CachingService cachingService;
 
-        public ProductDetailController (IRepositoryEcommerce_socks repo, PathProvider provider, 
+        public ProductDetailController (Ecommerce_socksService service, PathProvider provider, 
             CachingService caching) {
-            this.repository = repo;
+            this.service = service;
             this.cachingService = caching;
             this.provider = provider;
         }
-        public IActionResult Index (int product_id, int? favorite) {
+        public async Task<IActionResult> Index (int product_id, int? favorite) {
             if (favorite != null) {
                 this.cachingService.saveFavoritesCache((int)favorite);
             }
-            Product_Complete product = this.repository.GetProduct_Complete(product_id);
-            List<Product_Complete> products = product.Product_category != 4 ? this.repository.
-                GetProduct_CompletesByCategory((int)product.Product_category) : 
-                this.repository.GetProduct_Completes();
+            Product_Complete product = await this.service.GetProductCompleteAsync(product_id);
+            List<Product_Complete> products = product.Product_category != 4 ? await this.service.
+                GetProductCompleteByCategoryAsync((int)product.Product_category) : 
+                await this.service.GetProductCompleteAsync();
             ViewData["Products"] = products;
-            List<Product_sizes> productSizes = this.repository.GetProduct_Sizes_Views(product.Product_id);
+            List<Product_sizes> productSizes = await this.service.GetProduct_SizesByProductAsync(product.Product_id);
             ViewData["ProductSize"] = productSizes;
             List<String> imgs = this.provider.FindFiles("Product_" + product.Product_id, @"images/products");
             ViewData["Images"] = imgs;

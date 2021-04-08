@@ -1,5 +1,5 @@
 ﻿using ECommerceSocks_ASPNetCore.Helpers;
-using ECommerceSocks_ASPNetCore.Models;
+using EcommerceSocksAPI.Models;
 using ECommerceSocks_ASPNetCore.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -7,44 +7,45 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ECommerceSocks_ASPNetCore.Services;
 
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class CategorySectionController : Controller {
 
-        private IRepositoryEcommerce_socks repository;
+        private Ecommerce_socksService service;
         private IMemoryCache memoryCache;
         private CachingService cachingService;
 
-        public CategorySectionController (IRepositoryEcommerce_socks repo, 
+        public CategorySectionController (Ecommerce_socksService service, 
             IMemoryCache memoryCache, CachingService caching) {
-            this.repository = repo;
+            this.service = service;
             this.memoryCache = memoryCache;
             this.cachingService = caching;
         }
 
-        public IActionResult Index(int category_id, int? subcategory_id, int? favorite,
+        public async Task<IActionResult> Index(int category_id, int? subcategory_id, int? favorite,
             String? stylesFilter, String? printsFilter, String? colorsFilter) {
 
-            List<Product_Complete> products = 
-                repository.FilterProduct_Completes(category_id, subcategory_id, 
+            List<Product_Complete> products =
+                await this.service.FilterProductCompleteAsync(category_id, subcategory_id.ToString(), 
                 stylesFilter, printsFilter, colorsFilter);
 
-            Category category = this.repository.GetCategory(category_id);
+            Category category = await this.service.GetCategoryAsync(category_id);
             ViewData["Category"] = category;
-            List<Subcategory> subcategories = repository.GetSubcategories();
+            List<Subcategory> subcategories = await this.service.GetSubcategoriesAsync();
             ViewData["Subcategories"] = subcategories;
 
             List<String> styles = new List<String>();
             if (this.memoryCache.Get("Styles") == null) {
-                styles = this.repository.GetProductsStyles();
+                styles = await this.service.GetProductsStylesAsync();
                 this.memoryCache.Set("Styles", ToolkitService.SerializeJsonObject(styles));
             } else {
                 styles = ToolkitService.DeserializeJsonObject<List<String>>(this.memoryCache.Get("Styles").ToString());
             }
             ViewData["Styles"] = styles;
-            List<String> print = this.repository.GetProductsPrint();
+            List<String> print = await this.service.GetProductsPrintAsync();
             ViewData["Print"] = print;
-            List<String> color = this.repository.GetProductColor();
+            List<String> color = await this.service.GetProductsColorAsync();
             ViewData["Color"] = color;
 
             if (favorite != null) {
@@ -54,19 +55,19 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Index(int category_id, int subcategory_id, String? stylesFilter, 
+        public async Task<IActionResult> Index(int category_id, int subcategory_id, String? stylesFilter, 
             String? printsFilter, String? colorsFilter) {
 
-            List<Product_Complete> products = repository.FilterProduct_Completes(category_id, subcategory_id, 
+            List<Product_Complete> products = await this.service.FilterProductCompleteAsync(category_id, subcategory_id.ToString(), 
                 stylesFilter, printsFilter, colorsFilter);
 
-            List<Subcategory> subcategories = repository.GetSubcategories();
+            List<Subcategory> subcategories = await this.service.GetSubcategoriesAsync();
             ViewData["Subcategories"] = subcategories;
-            List<String> styles = this.repository.GetProductsStyles();
+            List<String> styles = await this.service.GetProductsStylesAsync();
             ViewData["Styles"] = styles;
-            List<String> print = this.repository.GetProductsPrint();
+            List<String> print = await this.service.GetProductsPrintAsync();
             ViewData["Print"] = print;
-            List<String> color = this.repository.GetProductColor();
+            List<String> color = await this.service.GetProductsColorAsync();
             ViewData["Color"] = color;
             return View(products);
         }

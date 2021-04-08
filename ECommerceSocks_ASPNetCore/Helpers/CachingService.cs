@@ -1,4 +1,4 @@
-﻿using ECommerceSocks_ASPNetCore.Models;
+﻿using EcommerceSocksAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using System;

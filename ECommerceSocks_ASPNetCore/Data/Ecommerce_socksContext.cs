@@ -1,4 +1,4 @@
-﻿using ECommerceSocks_ASPNetCore.Models;
+﻿using EcommerceSocksAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

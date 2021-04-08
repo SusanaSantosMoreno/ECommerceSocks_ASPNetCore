@@ -1,6 +1,6 @@
 ﻿using ECommerceSocks_ASPNetCore.Filters;
 using ECommerceSocks_ASPNetCore.Helpers;
-using ECommerceSocks_ASPNetCore.Models;
+using EcommerceSocksAPI.Models;
 using ECommerceSocks_ASPNetCore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ECommerceSocks_ASPNetCore.Services;
 
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class CheckoutController : Controller {

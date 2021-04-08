@@ -1,7 +1,7 @@
 ﻿using ECommerceSocks_ASPNetCore.Filters;
 using ECommerceSocks_ASPNetCore.Helpers;
-using ECommerceSocks_ASPNetCore.Models;
 using ECommerceSocks_ASPNetCore.Repositories;
+using EcommerceSocksAPI.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;

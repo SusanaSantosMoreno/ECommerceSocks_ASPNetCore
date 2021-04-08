@@ -1,6 +1,6 @@
 ﻿using ECommerceSocks_ASPNetCore.Data;
 using ECommerceSocks_ASPNetCore.Helpers;
-using ECommerceSocks_ASPNetCore.Models;
+using EcommerceSocksAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;

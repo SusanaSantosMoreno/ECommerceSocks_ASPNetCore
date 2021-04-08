@@ -83,6 +83,9 @@ namespace ECommerceSocks_ASPNetCore.Services {
             List<Product> styles = await this.CallApi<List<Product>>(request);
             return styles;
         }
+        #endregion
+
+        #region PRODUCT_COMPLETE
 
         public async Task<List<Product_Complete>> GetProductCompleteAsync () {
             String request = "api/Products_Complete";
@@ -90,9 +93,34 @@ namespace ECommerceSocks_ASPNetCore.Services {
             return products;
         }
 
-        //completebycategory
+        public async Task<List<Product_Complete>> GetProductCompleteByCategoryAsync (int categoryId) {
+            String request = "api/Products_Complete/GetProduct_CompletesByCategory/" + categoryId;
+            List<Product_Complete> productsComplete = await this.CallApi<List<Product_Complete>>(request);
+            return productsComplete;
+        }
+
+        public async Task<Product_Complete> GetProductCompleteAsync (int productId) {
+            string request = "api/Products_Complete/GetProduct_Complete/" + productId;
+            Product_Complete productComplete = await this.CallApi<Product_Complete>(request);
+            return productComplete;
+        }
+
+        public async Task<List<Product_Complete>> GetFirstProduct_CompleteAsync (int amount) {
+            String request = "api/Products_Complete/GetFirstProduct_Complete/" + amount;
+            List<Product_Complete> productsComplete = await this.CallApi<List<Product_Complete>>(request);
+            return productsComplete;
+        }
+
+        public async Task<List<Product_Complete>> FilterProductCompleteAsync (int categoryId, String subcategoryId, 
+            String? style, String? print, String? color) {
+            String request = "api/Products_Complete/FilterProduct_Completes/" + categoryId + "/" + 
+                subcategoryId + "/" + style + "/" + print + "/" + color;
+            List<Product_Complete> productsComplete = await this.CallApi<List<Product_Complete>>(request);
+            return productsComplete;
+        }
+
         #endregion
-        
+
         #region CATEGORIES
 
         public async Task<List<Category>> GetCategoriesAsync () {
@@ -142,17 +170,17 @@ namespace ECommerceSocks_ASPNetCore.Services {
 
         #region PRODUCT_SIZE
 
-        public async Task<List<Product_size>> GetProduct_SizesByProductAsync (int productId) {
+        public async Task<List<Product_sizes>> GetProduct_SizesByProductAsync (int productId) {
             String request = "api/Product_Sizes/GetProduct_Sizes/" + productId;
-            List<Product_size> productSizes = await this.CallApi<List<Product_size>>(request);
+            List<Product_sizes> productSizes = await this.CallApi<List<Product_sizes>>(request);
             return productSizes;
         }
 
-        public async Task<List<Product_size>> GetProduct_SizesByProductSizeAsync 
+        public async Task<Product_sizes> GetProduct_SizesByProductSizeAsync 
             (int productId, int sizeId) {
             String request = "api/Product_Sizes/GetProduct_Size/" + productId + "/" + sizeId;
-            List<Product_size> productSizes = await this.CallApi<List<Product_size>>(request);
-            return productSizes;
+            Product_sizes productSize = await this.CallApi<Product_sizes>(request);
+            return productSize;
         }
 
         #endregion
