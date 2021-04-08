@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ECommerceSocks_ASPNetCore.Data;
 using ECommerceSocks_ASPNetCore.Helpers;
 using ECommerceSocks_ASPNetCore.Repositories;
+using ECommerceSocks_ASPNetCore.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,7 @@ namespace ECommerceSocks_ASPNetCore {
         public void ConfigureServices (IServiceCollection services) {
             String cadena = configuration.GetConnectionString("EcommerceSocks_Azure");
             services.AddTransient<IRepositoryEcommerce_socks, Ecommerce_socksRepository>();
+            services.AddTransient(x => new Ecommerce_socksService(this.configuration["api"]));
             services.AddDbContext<Ecommerce_socksContext>(options => options.UseSqlServer(cadena));
             services.AddSingleton<PathProvider>();
             services.AddSingleton<CachingService>();
