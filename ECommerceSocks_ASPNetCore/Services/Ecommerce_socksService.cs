@@ -1,5 +1,7 @@
-﻿using EcommerceSocksAPI.Models;
+﻿using ECommerceSocks_ASPNetCore.Models;
+using EcommerceSocksAPI.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,45 @@ namespace ECommerceSocks_ASPNetCore.Services {
         public Ecommerce_socksService (String url) {
             this.UriApi = new Uri(url);
             this.Header = new MediaTypeWithQualityHeaderValue("application/json");
+        }
+
+        public async Task<String> GetToken () {
+            using (HttpClient client = new HttpClient()) {
+                client.BaseAddress = this.UriApi;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+
+                ApiUser user = new ApiUser("admin@admin.com", "1234");
+                String json = JsonConvert.SerializeObject(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                String request = "api/Auth/Login";
+                HttpResponseMessage response = await client.PostAsync(request, content);
+
+                if (response.IsSuccessStatusCode) {
+                    String data = await response.Content.ReadAsStringAsync();
+                    JObject jobject = JObject.Parse(data);
+                    String token = jobject.GetValue("response").ToString();
+                    return token;
+                } else {
+                    return null;
+                }
+            }
+        }
+
+        private async Task<T> CallApi<T> (String request, String token) {
+            using (HttpClient client = new HttpClient()) {
+                client.BaseAddress = this.UriApi;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + token);
+                HttpResponseMessage response = await client.GetAsync(request);
+                if (response.IsSuccessStatusCode) {
+                    T data = await response.Content.ReadAsAsync<T>();
+                    return data;
+                } else {
+                    return default(T);
+                }
+            }
         }
 
         private async Task<T> CallApi<T> (String request) {
@@ -328,6 +369,16 @@ namespace ECommerceSocks_ASPNetCore.Services {
                 await client.PostAsync(request, content);
             }
         }
+        #endregion
+
+        #region USERS
+
+        public async Task<Users> GetUserAsync (int userId) {
+            String request = "api/User/" + userId;
+            Users user = await this.CallApi<Users>(request, await this.GetToken());
+            return user;
+        }
+
         #endregion
     }
 }

@@ -68,6 +68,8 @@ namespace ECommerceSocks_ASPNetCore {
             }
             app.UseRouting();
             app.UseStaticFiles();
+
+            app.UseAuthorization();
             app.UseAuthentication();
             app.UseResponseCaching();
             app.UseSession();
