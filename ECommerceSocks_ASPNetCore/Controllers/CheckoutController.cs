@@ -14,33 +14,33 @@ using ECommerceSocks_ASPNetCore.Services;
 namespace ECommerceSocks_ASPNetCore.Controllers {
     public class CheckoutController : Controller {
 
-        IRepositoryEcommerce_socks repository;
+        Ecommerce_socksService service;
         CachingService cachingService;
 
-        public CheckoutController (IRepositoryEcommerce_socks repo, CachingService caching) {
-            this.repository = repo;
+        public CheckoutController (Ecommerce_socksService service, CachingService caching) {
+            this.service = service;
             this.cachingService = caching;
         }
 
         [UsersAuthorize]
-        public IActionResult Index (int? done) {
+        public async Task<IActionResult> Index (int? done) {
             List<Cart> cart = this.cachingService.GetCartCache();
             List<Cart_Complete> cartComplete = new List<Cart_Complete>();
-            Users user = this.repository.GetUser(
+            Users user = await this.service.GetUserAsync(
                     int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value.ToString()));
-            List<Addresses> addresses = this.repository.GetAddresses(user.Users_id);
+            List<Addresses> addresses = await this.service.GetAddressesByUserAsync(user.Users_id);
             
             foreach (Cart c in cart) {
-                 cartComplete.Add(new Cart_Complete(this.repository.GetProduct_Complete(c.Product_id),
-                        this.repository.GetProduct_Size_View(c.Product_id, c.Size_id), c.Amount));
+                 cartComplete.Add(new Cart_Complete(await this.service.GetProductCompleteAsync(c.Product_id),
+                       await this.service.GetProduct_SizesByProductSizeAsync(c.Product_id, c.Size_id), c.Amount));
             }
             ViewData["cart"] = cartComplete;
             ViewData["addresses"] = addresses;
             
             if (done != null) {
-                 Orders order = this.repository.AddOrder(user.Users_id);
+                 Orders order = await this.service.AddOrderAsync(user.Users_id, DateTime.Now);
                  foreach(Cart c in cart) {
-                     this.repository.AddOrderDetails(order.Orders_id, c.Product_id, c.Size_id, c.Amount);
+                     this.service.AddOrderDetailsAsync(order.Orders_id, c.Product_id, c.Size_id, c.Amount);
                  }
                  this.cachingService.CleanCartCache();
                  return RedirectToAction("Index", "Home");

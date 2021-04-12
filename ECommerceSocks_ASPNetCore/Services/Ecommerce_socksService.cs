@@ -240,13 +240,18 @@ namespace ECommerceSocks_ASPNetCore.Services {
             return favorites;
         }
 
-        public async void AddFavoriteAsync (int favoriteId, int favoriteProduct, int favoriteUser) {
+        public async void AddFavoriteAsync (int favoriteProduct, int favoriteUser) {
             using (HttpClient client = new HttpClient()) {
                 String request = "api/Favorites/AddFavorite";
                 client.BaseAddress = this.UriApi;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
-                Favorite favorites = new Favorite(favoriteId, favoriteProduct, favoriteUser);
+                int lastId = 0;
+                List<Favorite> fav = await this.GetFavoritesAsync();
+                if (fav.Count > 0) {
+                    lastId = fav.OrderByDescending(x => x.Favorite_id).FirstOrDefault().Favorite_id;
+                }
+                Favorite favorites = new Favorite((lastId + 1), favoriteProduct, favoriteUser);
                 String json = JsonConvert.SerializeObject(favorites);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 await client.PostAsync(request, content);
@@ -337,26 +342,27 @@ namespace ECommerceSocks_ASPNetCore.Services {
             return order;
         }
 
-        public async Task<Order_details> GetOrderDetailsAsync (int orderId) {
+        public async Task<List<Order_details>> GetOrderDetailsAsync (int orderId) {
             String request = "api/Orders/GetOrder_Detail/" + orderId;
-            Order_details order_Details = await this.CallApi<Order_details>(request);
+            List<Order_details> order_Details = await this.CallApi<List<Order_details>>(request);
             return order_Details;
         }
 
-        public async void AddOrderAsync (int orderId, int orderUser, DateTime orderDate) {
+        public async Task<Orders> AddOrderAsync ( int orderUser, DateTime orderDate) {
             using (HttpClient client = new HttpClient()) {
                 String request = "api/Orders/AddOrder";
                 client.BaseAddress = this.UriApi;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
-                Orders order = new Orders(orderId, orderUser, orderDate);
+                Orders order = new Orders(this.generateRandomId(), orderUser, orderDate);
                 String json = JsonConvert.SerializeObject(order);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 await client.PostAsync(request, content);
+                return order;
             }
         }
 
-        public async void AddOrderDetailsAsync (int orderDetailsId, int orderId, 
+        public async void AddOrderDetailsAsync (int orderId, 
             int product_id, int size_id, int amount) {
             using (HttpClient client = new HttpClient()) {
                 String request = "api/Orders/AddOrderDetails";
@@ -379,6 +385,71 @@ namespace ECommerceSocks_ASPNetCore.Services {
             return user;
         }
 
+        public async Task<Users> GetUserByCredentialsAsync (String email, String password) {
+            String request = "api/User/GetUserByCredentials/" + email + "/" + password;
+            Users user = await this.CallApi<Users>(request, await this.GetToken());
+            return user;
+        }
+
+        public async Task<Users> GetUserByEmailAsync (String email) {
+            String request = "api/User/GetUserByEmail/" + email;
+            Users user = await this.CallApi<Users>(request, await this.GetToken());
+            return user;
+        }
+
+        public async void AddUserAsync (String userName, String userLastName, 
+            String userEmail, String userPassword, String userNationality, String userPhone, 
+            DateTime userBirthDate, String userGender, String userSalt) {
+            using (HttpClient client = new HttpClient()) {
+                String request = "api/User/AddUser";
+                client.BaseAddress = this.UriApi;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + await this.GetToken());
+                Users user = new Users(this.generateRandomId(), userName + " " + userLastName, userEmail, userPassword, 
+                    userNationality, userPhone, userBirthDate, userGender, userSalt);
+                String json = JsonConvert.SerializeObject(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                await client.PostAsync(request, content);
+            }
+        }
+
+
+        public async void EditUserAsync (int userId, String userName, String userLastName,
+            String userEmail, String userPassword, String userNationality, String userPhone,
+            DateTime userBirthDate, String userGender, String userSalt) {
+            using (HttpClient client = new HttpClient()) {
+                String request = "api/User/EditUser";
+                client.BaseAddress = this.UriApi;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + await this.GetToken());
+                Users user = new Users(userId, userName + " " + userLastName, userEmail, userPassword,
+                    userNationality, userPhone, userBirthDate, userGender, userSalt);
+                String json = JsonConvert.SerializeObject(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                await client.PutAsync(request, content);
+            }
+        }
+
+
+        public async void SetPasswordAsync (int userId, String password) {
+            using (HttpClient client = new HttpClient()) {
+                String request = "/api/User/SetPassword/"+ userId + "/" +password;
+                client.BaseAddress = this.UriApi;
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(this.Header);
+                client.DefaultRequestHeaders.Add("Authorization", "bearer " + await this.GetToken());
+                await client.PutAsync(request, null);
+            }
+        }
         #endregion
+
+        public int generateRandomId () {
+            int randomValue;
+            Random random = new Random();
+            randomValue = random.Next(1000, 9999);
+            return randomValue;
+        }
     }
 }

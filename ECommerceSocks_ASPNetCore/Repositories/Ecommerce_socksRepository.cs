@@ -198,11 +198,6 @@ namespace ECommerceSocks_ASPNetCore.Repositories {
             int randomValue;
             Random random = new Random();
             randomValue = random.Next(1000, 9999);
-            /*using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider()) {
-                byte [] val = new byte [6];
-                crypto.GetBytes(val);
-                randomValue = (int)BitConverter.ToUInt32(val, 0);
-            }*/
             return randomValue;
         }
 
