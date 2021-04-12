@@ -3,7 +3,7 @@
 }
 
 .portrait-image {
-    background: url(../../images/bannerImage.jpg);
+    background: url(https://ecommercesocksstorage.blob.core.windows.net/socks-blobs-container/bannerImage.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 500px;
@@ -50,17 +50,17 @@
 }
 
 #menPortrait {
-    background: url(../../images/menPortrait.jpg) no-repeat;
+    background: url(https://ecommercesocksstorage.blob.core.windows.net/socks-blobs-container/menPortrait.jpg) no-repeat;
     background-size: cover;
 }
 
 #womenPortrait {
-    background: url(../../images/womenPortrait.jpg) no-repeat;
+    background: url(https://ecommercesocksstorage.blob.core.windows.net/socks-blobs-container/womenPortrait.jpg) no-repeat;
     background-size: cover;
 }
 
 #kidsPortrait {
-    background: url(../../images/kidsPortrait.jpg) no-repeat;
+    background: url(https://ecommercesocksstorage.blob.core.windows.net/socks-blobs-container/kidsPortrait.jpg) no-repeat;
     background-size: cover;
 }
 
@@ -74,7 +74,7 @@
 }
 
 #packsPortrait {
-    background: url(../../images/packsPortrait.jpg) no-repeat;
+    background: url(https://ecommercesocksstorage.blob.core.windows.net/socks-blobs-container/packsPortrait.jpg) no-repeat;
     background-size: cover;
     height: 300px;
     position: relative;
