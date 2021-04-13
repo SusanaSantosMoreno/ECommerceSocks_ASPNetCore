@@ -1,6 +1,5 @@
 ﻿using ECommerceSocks_ASPNetCore.Helpers;
 using EcommerceSocksAPI.Models;
-using ECommerceSocks_ASPNetCore.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;

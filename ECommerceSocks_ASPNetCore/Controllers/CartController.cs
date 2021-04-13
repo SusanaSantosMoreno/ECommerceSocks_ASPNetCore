@@ -1,5 +1,4 @@
 ﻿using ECommerceSocks_ASPNetCore.Helpers;
-using ECommerceSocks_ASPNetCore.Repositories;
 using ECommerceSocks_ASPNetCore.Services;
 using EcommerceSocksAPI.Models;
 using Microsoft.AspNetCore.Mvc;

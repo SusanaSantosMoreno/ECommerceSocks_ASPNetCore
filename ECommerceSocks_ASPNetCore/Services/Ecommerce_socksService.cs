@@ -369,7 +369,7 @@ namespace ECommerceSocks_ASPNetCore.Services {
                 client.BaseAddress = this.UriApi;
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(this.Header);
-                Order_details orderDetails = new Order_details(product_id, product_id, size_id, amount);
+                Order_details orderDetails = new Order_details(orderId, product_id, size_id, amount);
                 String json = JsonConvert.SerializeObject(orderDetails);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 await client.PostAsync(request, content);
