@@ -33,7 +33,7 @@ namespace ECommerceSocks_ASPNetCore.Controllers {
             ViewData["Products"] = products;
             List<Product_sizes> productSizes = await this.service.GetProduct_SizesByProductAsync(product.Product_id);
             ViewData["ProductSize"] = productSizes;
-            List<String> imgs = this.provider.FindFiles("Product_" + product.Product_id, @"images/products");
+            List<String> imgs = this.provider.FindFiles("Product_" + product.Product_id, @"images/Products");
             ViewData["Images"] = imgs;
             return View(product);
         }
