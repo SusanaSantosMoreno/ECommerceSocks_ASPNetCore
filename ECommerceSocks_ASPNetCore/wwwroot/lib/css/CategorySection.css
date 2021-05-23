@@ -1,7 +1,7 @@
 ﻿
 
 #category_header_men {
-    background: url(../../images/men-banner.jpg);
+    background: url(https://ecommerce-socks-images.s3.amazonaws.com/men-banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 400px;
@@ -9,7 +9,7 @@
 }
 
 #category_header_women {
-    background: url(../../images/women-banner.jpg);
+    background: url(https://ecommerce-socks-images.s3.amazonaws.com/women-banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 400px;
@@ -17,7 +17,7 @@
 }
 
 #category_header_kids {
-    background: url(../../images/kids_banner.jpg);
+    background: url(https://ecommerce-socks-images.s3.amazonaws.com/kids_banner.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     height: 400px;
@@ -25,7 +25,7 @@
 }
 
 #category_header_packs {
-    background: url(../../images/packs_banner.png);
+    background: url(https://ecommerce-socks-images.s3.amazonaws.com/packs_banner.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 400px;

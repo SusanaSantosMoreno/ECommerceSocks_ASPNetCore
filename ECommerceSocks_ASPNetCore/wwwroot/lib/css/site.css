@@ -111,7 +111,7 @@ a {
 }
 
 #loginBackground {
-    background: url(../../images/LoginBackground.jpg);
+    background: url(https://ecommerce-socks-images.s3.amazonaws.com/LoginBackground.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
