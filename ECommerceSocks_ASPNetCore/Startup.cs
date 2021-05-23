@@ -25,7 +25,7 @@ namespace ECommerceSocks_ASPNetCore {
         }
        
         public void ConfigureServices (IServiceCollection services) {
-            String cadena = configuration.GetConnectionString("EcommerceSocks_Azure");
+            String cadena = configuration.GetConnectionString("EcommerceSocks_AWS");
             services.AddTransient(x => new Ecommerce_socksService(this.configuration["api"]));
             services.AddDbContext<Ecommerce_socksContext>(options => options.UseSqlServer(cadena));
             services.AddSingleton<PathProvider>();
